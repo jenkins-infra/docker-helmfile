@@ -1,6 +1,8 @@
 # hadolint ignore=DL3006
 FROM alpine
 
+SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+
 LABEL \
   maintainer="https://github.com/olblak" \
   repository="https://github.com/jenkins-infra/charts"
@@ -16,7 +18,6 @@ ENV HELM_VERSION=v3.2.1
 ENV HELM_LOCATION="https://get.helm.sh"
 ENV HELM_FILENAME="helm-${HELM_VERSION}-linux-amd64.tar.gz"
 ENV HELM_SHA256="018f9908cb950701a5d59e757653a790c66d8eda288625dbb185354ca6f41f6b"
-# hadolint ignore=DL4006
 RUN wget ${HELM_LOCATION}/${HELM_FILENAME} && \
     sha256sum ${HELM_FILENAME} | grep -q "${HELM_SHA256}" && \
     tar zxf ${HELM_FILENAME} && mv /linux-amd64/helm /usr/local/bin/ && \
@@ -25,7 +26,6 @@ RUN wget ${HELM_LOCATION}/${HELM_FILENAME} && \
 # Install helm
 ENV KUBECTL_VERSION=v1.15.12
 ENV KUBECTL_SHA256="a32b762279c33cb8d8f4198f3facdae402248c3164e9b9b664c3afbd5a27472e"
-# hadolint ignore=DL4006
 RUN wget "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -O kubectl && \
     sha256sum kubectl | grep ${KUBECTL_SHA256} && \
     chmod +x kubectl && \
