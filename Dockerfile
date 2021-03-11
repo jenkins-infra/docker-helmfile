@@ -54,5 +54,4 @@ RUN \
   helm plugin install https://github.com/futuresimple/helm-secrets && \
   helm plugin install https://github.com/aslafy-z/helm-git.git
 
-# hadolint ignore=DL3025
-ENTRYPOINT "/usr/local/bin/helmfile"
+ENTRYPOINT ["/usr/local/bin/helmfile"]

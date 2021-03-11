@@ -18,7 +18,7 @@ metadataTest:
       value: "https://github.com/olblak"
     - key: repository
       value: "https://github.com/jenkins-infra/charts"
-  entrypoint: ["/bin/sh", "-c", "\"/usr/local/bin/helmfile\""]
+  entrypoint: ["/usr/local/bin/helmfile"]
   cmd: []
   workdir: "/home/helm"
 
