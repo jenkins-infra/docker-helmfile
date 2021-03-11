@@ -10,6 +10,12 @@ metadataTest:
       value: "https://github.com/olblak"
     - key: repository
       value: "https://github.com/jenkins-infra/charts"
+    - key: io.jenkins-infra.tools
+      value: "aws-cli,aws-iam-authenticator"
+    - key: io.jenkins-infra.tools.aws-cli.version
+      value: "1.18"
+    - key: io.jenkins-infra.tools.aws-iam-authenticator.version
+      value: "latest"
   entrypoint: ["/usr/local/bin/helmfile"]
   cmd: []
   workdir: "/home/helm"
@@ -52,6 +58,14 @@ fileExistenceTests:
     isExecutableBy: 'any'
   - name: 'SOPS CLI'
     path: '/usr/local/bin/sops'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'AWS CLI'
+    path: '/usr/bin/aws'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'AWS Authenticator'
+    path: '/usr/local/bin/aws-iam-authenticator'
     shouldExist: true
     isExecutableBy: 'any'
   - name: "Default user's home"

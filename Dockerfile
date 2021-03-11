@@ -1,5 +1,4 @@
-# hadolint ignore=DL3006
-FROM alpine
+FROM alpine:3.13
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
@@ -43,6 +42,13 @@ RUN \
   wget https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -O /usr/local/bin/helmfile && \
   chmod +x /usr/local/bin/helmfile
 
+# Install aws CLi tools
+ARG AWS_CLI_VERSION=1.18
+RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}"
+RUN wget https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator -O /usr/local/bin/aws-iam-authenticator \
+  && chmod a+x /usr/local/bin/aws-iam-authenticator \
+  && aws-iam-authenticator version
+
 RUN adduser -D -u 1000 helm
 
 USER helm
@@ -53,5 +59,9 @@ RUN \
   helm plugin install https://github.com/databus23/helm-diff && \
   helm plugin install https://github.com/futuresimple/helm-secrets && \
   helm plugin install https://github.com/aslafy-z/helm-git.git
+
+LABEL io.jenkins-infra.tools="aws-cli,aws-iam-authenticator"
+LABEL io.jenkins-infra.tools.aws-cli.version="${AWS_CLI_VERSION}"
+LABEL io.jenkins-infra.tools.aws-iam-authenticator.version="latest"
 
 ENTRYPOINT ["/usr/local/bin/helmfile"]
