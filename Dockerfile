@@ -25,22 +25,20 @@ RUN wget ${HELM_LOCATION}/${HELM_FILENAME} && \
 # Install helm
 ENV KUBECTL_VERSION=v1.15.12
 ENV KUBECTL_SHA256="a32b762279c33cb8d8f4198f3facdae402248c3164e9b9b664c3afbd5a27472e"
-# hadolint ignore=DL4001,DL4006
-RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" && \
+# hadolint ignore=DL4006
+RUN wget "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -O kubectl && \
     sha256sum kubectl | grep ${KUBECTL_SHA256} && \
     chmod +x kubectl && \
     mv kubectl /usr/local/bin/kubectl
 
-# Instal sops
+# Install sops
 ENV SOPS_VERSION="v3.5.0"
-# hadolint ignore=DL4001
 RUN \
   wget https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux -O /usr/local/bin/sops && \
   chmod +x /usr/local/bin/sops
 
-# Instal helmfile
+# Install helmfile
 ENV HELMFILE_VERSION="0.116.0"
-# hadolint ignore=DL4001
 RUN \
   wget https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -O /usr/local/bin/helmfile && \
   chmod +x /usr/local/bin/helmfile
