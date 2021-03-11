@@ -2,10 +2,6 @@ FROM alpine:3.13
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
-LABEL \
-  maintainer="https://github.com/olblak" \
-  repository="https://github.com/jenkins-infra/charts"
-
 ENV HELM_HOME="/home/helm/.helm"
 
 # hadolint ignore=DL3018
@@ -60,7 +56,12 @@ RUN \
   helm plugin install https://github.com/futuresimple/helm-secrets && \
   helm plugin install https://github.com/aslafy-z/helm-git.git
 
-LABEL io.jenkins-infra.tools="aws-cli,aws-iam-authenticator"
+LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator"
+LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
+LABEL io.jenkins-infra.tools.helm.plugins="helm-diff,helm-git,helm-secrets"
+LABEL io.jenkins-infra.tools.kubectl.version="${KUBECTL_VERSION}"
+LABEL io.jenkins-infra.tools.sops.version="${SOPS_VERSION}"
+LABEL io.jenkins-infra.tools.helmfile.version="${HELMFILE_VERSION}"
 LABEL io.jenkins-infra.tools.aws-cli.version="${AWS_CLI_VERSION}"
 LABEL io.jenkins-infra.tools.aws-iam-authenticator.version="latest"
 
