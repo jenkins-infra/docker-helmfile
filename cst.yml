@@ -3,16 +3,8 @@ schemaVersion: 2.0.0
 
 metadataTest:
   env:
-    - key: "HELM_VERSION"
-      value: "v3.2.1"
-    - key: "HELM_LOCATION"
-      value: "https://get.helm.sh"
-    - key: "KUBECTL_VERSION"
-      value: "v1.15.12"
-    - key: "SOPS_VERSION"
-      value: "v3.5.0"
-    - key: "HELMFILE_VERSION"
-      value: "0.116.0"
+    - key: "HELM_HOME"
+      value: "/home/helm/.helm"
   labels:
     - key: maintainer
       value: "https://github.com/olblak"
