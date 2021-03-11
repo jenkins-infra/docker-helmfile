@@ -1,0 +1,1 @@
+buildDockerAndPublishImage('helmfile', [mainBranch: 'main'])

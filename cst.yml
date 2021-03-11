@@ -1,0 +1,77 @@
+---
+schemaVersion: 2.0.0
+
+metadataTest:
+  env:
+    - key: "HELM_VERSION"
+      value: "v3.2.1"
+    - key: "HELM_LOCATION"
+      value: "https://get.helm.sh"
+    - key: "KUBECTL_VERSION"
+      value: "v1.15.12"
+    - key: "SOPS_VERSION"
+      value: "v3.5.0"
+    - key: "HELMFILE_VERSION"
+      value: "0.116.0"
+  labels:
+    - key: maintainer
+      value: "https://github.com/olblak"
+    - key: repository
+      value: "https://github.com/jenkins-infra/charts"
+  entrypoint: ["/bin/sh", "-c", "\"/usr/local/bin/helmfile\""]
+  cmd: []
+  workdir: "/home/helm"
+
+fileExistenceTests:
+  - name: 'Bash'
+    path: '/bin/bash'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'Curl'
+    path: '/usr/bin/curl'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'Git'
+    path: '/usr/bin/git'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'wget'
+    path: '/usr/bin/wget'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'GPG2'
+    path: '/usr/bin/gpg2'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'Ca Cert'
+    path: '/usr/share/ca-certificates'
+    shouldExist: true
+  - name: 'Helm CLI'
+    path: '/usr/local/bin/helm'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'Kubectl CLI'
+    path: '/usr/local/bin/kubectl'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'Helmfile CLI'
+    path: '/usr/local/bin/helmfile'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: 'SOPS CLI'
+    path: '/usr/local/bin/sops'
+    shouldExist: true
+    isExecutableBy: 'any'
+  - name: "Default user's home"
+    path: '/home/helm'
+    shouldExist: true
+  - name: "Helm Diff plugin"
+    path: '/home/helm/.local/share/helm/plugins/helm-diff'
+    shouldExist: true
+  - name: "Helm Git plugin"
+    path: '/home/helm/.local/share/helm/plugins/helm-git.git'
+    shouldExist: true
+  - name: "Helm Secrets plugin"
+    path: '/home/helm/.local/share/helm/plugins/helm-secrets'
+    shouldExist: true
+...
