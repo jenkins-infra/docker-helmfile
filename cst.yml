@@ -15,7 +15,7 @@ metadataTest:
     - key: io.jenkins-infra.tools.kubectl.version
       value: "1.15.12"
     - key: io.jenkins-infra.tools.sops.version
-      value: "3.5.0"
+      value: "3.7.0"
     - key: io.jenkins-infra.tools.aws-cli.version
       value: "1.18"
     - key: io.jenkins-infra.tools.aws-iam-authenticator.version
