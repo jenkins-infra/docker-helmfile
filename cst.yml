@@ -1,6 +1,4 @@
----
 schemaVersion: 2.0.0
-
 metadataTest:
   env:
     - key: "HELM_HOME"
@@ -11,7 +9,7 @@ metadataTest:
     - key: io.jenkins-infra.tools.helm.version
       value: "3.2.1"
     - key: io.jenkins-infra.tools.helmfile.version
-      value: "0.116.0"
+      value: "0.138.7"
     - key: "io.jenkins-infra.tools.helm.plugins"
       value: "helm-diff,helm-git,helm-secrets"
     - key: io.jenkins-infra.tools.kubectl.version
@@ -25,7 +23,6 @@ metadataTest:
   entrypoint: ["/usr/local/bin/helmfile"]
   cmd: []
   workdir: "/home/helm"
-
 fileExistenceTests:
   - name: 'Bash'
     path: '/bin/bash'
@@ -86,4 +83,3 @@ fileExistenceTests:
   - name: "Helm Secrets plugin"
     path: '/home/helm/.local/share/helm/plugins/helm-secrets'
     shouldExist: true
-...
