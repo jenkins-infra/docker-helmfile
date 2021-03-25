@@ -9,15 +9,15 @@ metadataTest:
     - key: io.jenkins-infra.tools
       value: "helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator"
     - key: io.jenkins-infra.tools.helm.version
-      value: "v3.2.1"
+      value: "3.2.1"
     - key: io.jenkins-infra.tools.helmfile.version
       value: "0.116.0"
     - key: "io.jenkins-infra.tools.helm.plugins"
       value: "helm-diff,helm-git,helm-secrets"
     - key: io.jenkins-infra.tools.kubectl.version
-      value: "v1.15.12"
+      value: "1.15.12"
     - key: io.jenkins-infra.tools.sops.version
-      value: "v3.5.0"
+      value: "3.5.0"
     - key: io.jenkins-infra.tools.aws-cli.version
       value: "1.18"
     - key: io.jenkins-infra.tools.aws-iam-authenticator.version

@@ -5,43 +5,47 @@ SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 ENV HELM_HOME="/home/helm/.helm"
 
 # hadolint ignore=DL3018
-RUN \
-  apk add --no-cache gnupg wget ca-certificates git bash curl
+RUN apk add --no-cache \
+  ca-certificates \
+  curl \
+  bash \
+  git \
+  gnupg \
+  tar \
+  unzip \
+  wget
 
-# Install kubectl
-ARG HELM_VERSION=v3.2.1
-ARG HELM_LOCATION="https://get.helm.sh"
-ARG HELM_FILENAME="helm-${HELM_VERSION}-linux-amd64.tar.gz"
-ARG HELM_SHA256="018f9908cb950701a5d59e757653a790c66d8eda288625dbb185354ca6f41f6b"
-RUN wget ${HELM_LOCATION}/${HELM_FILENAME} && \
-    sha256sum ${HELM_FILENAME} | grep -q "${HELM_SHA256}" && \
-    tar zxf ${HELM_FILENAME} && mv /linux-amd64/helm /usr/local/bin/ && \
-    rm ${HELM_FILENAME} && rm -r /linux-amd64
+ARG HELM_VERSION="3.2.1"
+RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" -O /tmp/helm.tgz \
+    && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
+    && rm /tmp/* \
+    && helm version | grep -q "${HELM_VERSION}"
 
-# Install helm
-ARG KUBECTL_VERSION=v1.15.12
-ARG KUBECTL_SHA256="a32b762279c33cb8d8f4198f3facdae402248c3164e9b9b664c3afbd5a27472e"
-RUN wget "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -O kubectl && \
-    sha256sum kubectl | grep ${KUBECTL_SHA256} && \
-    chmod +x kubectl && \
-    mv kubectl /usr/local/bin/kubectl
+ARG KUBECTL_VERSION="1.15.12"
+RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl \
+    && chmod +x /usr/local/bin/kubectl \
+    && kubectl version --client | grep -q "${KUBECTL_VERSION}"
 
 # Install sops
-ARG SOPS_VERSION="v3.5.0"
-RUN \
-  wget https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux -O /usr/local/bin/sops && \
-  chmod +x /usr/local/bin/sops
+ARG SOPS_VERSION="3.5.0"
+RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux" -O /usr/local/bin/sops \
+  && chmod +x /usr/local/bin/sops \
+  && sops --version | grep -q "${SOPS_VERSION}"
 
 # Install helmfile
 ARG HELMFILE_VERSION="0.116.0"
-RUN \
-  wget https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -O /usr/local/bin/helmfile && \
-  chmod +x /usr/local/bin/helmfile
+RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64" -O /usr/local/bin/helmfile \
+  && chmod +x /usr/local/bin/helmfile \
+  && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
-# Install aws CLi tools
+## Install aws CLiI tools
+# Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
 ARG AWS_CLI_VERSION=1.18
-RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}"
-RUN wget https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator -O /usr/local/bin/aws-iam-authenticator \
+# hadolint ignore=DL3018
+RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}" less groff \
+  && aws --version | grep -q "${AWS_CLI_VERSION}"
+ARG AWS_IAM_AUTH_VERSION="1.19.6"
+RUN wget "https://amazon-eks.s3.us-west-2.amazonaws.com/${AWS_IAM_AUTH_VERSION}/2021-01-05/bin/linux/amd64/aws-iam-authenticator" -O /usr/local/bin/aws-iam-authenticator \
   && chmod a+x /usr/local/bin/aws-iam-authenticator \
   && aws-iam-authenticator version
 
