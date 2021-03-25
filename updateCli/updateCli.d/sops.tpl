@@ -1,4 +1,5 @@
 ---
+title: "[sops] Update version"
 source:
   kind: githubRelease
   name: Get the latest SOPS version
@@ -26,6 +27,15 @@ targets:
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[5].value"
+    scm:
+      github:
+        user: "{{ .github.user }}"
+        email: "{{ .github.email }}"
+        owner: "{{ .github.owner }}"
+        repository: "{{ .github.repository }}"
+        token: "{{ requiredEnv .github.token }}"
+        username: "{{ .github.username }}"
+        branch: "{{ .github.branch }}"
   updateDockerfileArgSopsVersion:
     name: "Update the value of ARG SOPS_VERSION in the Dockerfile"
     kind: dockerfile
