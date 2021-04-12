@@ -1,1 +1,55 @@
-buildDockerAndPublishImage('helmfile', [mainBranch: 'main'])
+
+@Library('pipeline-library@pull/196/head') _
+
+parallel(
+  failFast: true,
+  'docker-image': {
+    buildDockerAndPublishImage('helmfile', [
+      mainBranch: 'main',
+      automaticSemanticVersioning: true,
+      gitCredentials: 'github-app-infra'
+    ])
+  },
+  'updatecli': {
+    podTemplate(
+      inheritFrom: 'jnlp-linux',
+      yaml: '''
+apiVersion: "v1"
+kind: "Pod"
+spec:
+  containers:
+    - name: "updatecli"
+      image: "ghcr.io/updatecli/updatecli:v0.2.0"
+      imagePullPolicy: "IfNotPresent"
+      command:
+        - "sleep"
+      args:
+        - "99d"
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "400m"
+        requests:
+          memory: "512Mi"
+          cpu: "400m"
+'''
+    ) {
+      node(POD_LABEL) {
+        container('updatecli') {
+          withCredentials([string(credentialsId: 'updatecli-github-token', variable: 'UPDATECLI_GITHUB_TOKEN')]) {
+            def updatecliArgs = '--config ./updatecli/updatecli.d --values ./updatecli/values.yaml'
+            stage('Updatecli: Diff') {
+              checkout scm
+              sh 'updatecli diff ' + updatecliArgs
+            }
+            if (env.BRANCH_NAME == 'main') {
+              stage('Updatecli: Apply') {
+                sh 'updatecli apply ' + updatecliArgs
+              }
+            } // stage
+          } // withCredentials
+        } // container
+      } // node
+    } // podTemplate
+  },
+)
