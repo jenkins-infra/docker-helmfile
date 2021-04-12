@@ -21,7 +21,7 @@ RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" -O /tmp/
     && rm /tmp/* \
     && helm version | grep -q "${HELM_VERSION}"
 
-ARG KUBECTL_VERSION="1.15.12"
+ARG KUBECTL_VERSION="1.18.17"
 RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl \
     && kubectl version --client | grep -q "${KUBECTL_VERSION}"
