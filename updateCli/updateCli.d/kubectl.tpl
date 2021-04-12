@@ -1,33 +1,35 @@
 ---
-title: "[helmfile] Update version"
+title: "[kubectl] Update version"
 sources:
-  helmfile:
+  default:
     kind: githubRelease
-    name: Get the latest helmfile version
+    name: Get the latest kubectl version
+    transformers:
+      - trimPrefix: "kubernetes-"
     spec:
-      owner: "roboll"
-      repository: "helmfile"
+      owner: "kubernetes"
+      repository: "kubectl"
       token: "{{ requiredEnv .github.token }}"
       username: "{{ .github.username }}"
       versionFilter:
-        kind: semver
-        pattern: "~0"
+        kind: regex
+        pattern: "^kubernetes-1.18.(\\d*)$"
 conditions:
-  dockerfileArgHelmfileVersion:
-    name: "Does the Dockerfile have an ARG instruction which key is HELMFILE_VERSION?"
+  dockerfileArgKubectlVersion:
+    name: "Does the Dockerfile have an ARG instruction which key is KUBECTL_VERSION?"
     kind: dockerfile
     spec:
       file: Dockerfile
       instruction:
         keyword: "ARG"
-        matcher: "HELMFILE_VERSION"
-  testCstHelmfileVersion:
-    name: "Update the value of HELMFILE_VERSION in the test harness"
+        matcher: "KUBECTL_VERSION"
+  testCstKubectlVersion:
+    name: "Update the value of KUBECTL_VERSION in the test harness"
     kind: yaml
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[2].key"
-      value: io.jenkins-infra.tools.helmfile.version
+      key: "metadataTest.labels[4].key"
+      value: "io.jenkins-infra.tools.kubectl.version"
     scm:
       github:
         user: "{{ .github.user }}"
@@ -38,12 +40,12 @@ conditions:
         username: "{{ .github.username }}"
         branch: "{{ .github.branch }}"
 targets:
-  updateCstHelmfileVersion:
-    name: "Update the value of HELMFILE_VERSION in the test harness"
+  updateCstKubectlVersion:
+    name: "Update the value of KUBECTL_VERSION in the test harness"
     kind: yaml
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[2].value"
+      key: "metadataTest.labels[4].value"
     scm:
       github:
         user: "{{ .github.user }}"
@@ -53,14 +55,14 @@ targets:
         token: "{{ requiredEnv .github.token }}"
         username: "{{ .github.username }}"
         branch: "{{ .github.branch }}"
-  updateDockerfileArgHelmfileVersion:
-    name: "Update the value of ARG HELMFILE_VERSION in the Dockerfile"
+  updateDockerfileArgKubectlVersion:
+    name: "Update the value of ARG KUBECTL_VERSION in the Dockerfile"
     kind: dockerfile
     spec:
       file: Dockerfile
       instruction:
         keyword: "ARG"
-        matcher: "HELMFILE_VERSION"
+        matcher: "KUBECTL_VERSION"
     scm:
       github:
         user: "{{ .github.user }}"
