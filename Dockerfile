@@ -16,25 +16,25 @@ RUN apk add --no-cache \
   wget
 
 ARG HELM_VERSION="3.2.1"
-RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" -O /tmp/helm.tgz \
+RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
     && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
     && rm /tmp/* \
     && helm version | grep -q "${HELM_VERSION}"
 
 ARG KUBECTL_VERSION="1.18.17"
-RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" -O /usr/local/bin/kubectl \
+RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" --quiet --output-document=/usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl \
     && kubectl version --client | grep -q "${KUBECTL_VERSION}"
 
 # Install sops
 ARG SOPS_VERSION=3.7.0
-RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux" -O /usr/local/bin/sops \
+RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux" --quiet --output-document=/usr/local/bin/sops \
   && chmod +x /usr/local/bin/sops \
   && sops --version | grep -q "${SOPS_VERSION}"
 
 # Install helmfile
 ARG HELMFILE_VERSION=0.138.7
-RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64" -O /usr/local/bin/helmfile \
+RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64" --quiet --output-document=/usr/local/bin/helmfile \
   && chmod +x /usr/local/bin/helmfile \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
@@ -45,7 +45,7 @@ ARG AWS_CLI_VERSION=1.18
 RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}" less groff \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 ARG AWS_IAM_AUTH_VERSION="1.19.6"
-RUN wget "https://amazon-eks.s3.us-west-2.amazonaws.com/${AWS_IAM_AUTH_VERSION}/2021-01-05/bin/linux/amd64/aws-iam-authenticator" -O /usr/local/bin/aws-iam-authenticator \
+RUN wget "https://amazon-eks.s3.us-west-2.amazonaws.com/${AWS_IAM_AUTH_VERSION}/2021-01-05/bin/linux/amd64/aws-iam-authenticator" --quiet --output-document=/usr/local/bin/aws-iam-authenticator \
   && chmod a+x /usr/local/bin/aws-iam-authenticator \
   && aws-iam-authenticator version
 
