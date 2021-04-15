@@ -13,7 +13,7 @@ metadataTest:
     - key: "io.jenkins-infra.tools.helm.plugins"
       value: "helm-diff,helm-git,helm-secrets"
     - key: io.jenkins-infra.tools.kubectl.version
-      value: "1.18.17"
+      value: "1.18.18"
     - key: io.jenkins-infra.tools.sops.version
       value: "3.7.1"
     - key: io.jenkins-infra.tools.aws-cli.version
