@@ -15,7 +15,7 @@ RUN apk add --no-cache \
   unzip \
   wget
 
-ARG HELM_VERSION=3.5.4
+ARG HELM_VERSION=3.6.0
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
     && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
     && rm /tmp/* \
@@ -33,7 +33,7 @@ RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sop
   && sops --version | grep -q "${SOPS_VERSION}"
 
 # Install helmfile
-ARG HELMFILE_VERSION=0.138.7
+ARG HELMFILE_VERSION=0.139.9
 RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64" --quiet --output-document=/usr/local/bin/helmfile \
   && chmod +x /usr/local/bin/helmfile \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
