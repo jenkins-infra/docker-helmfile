@@ -15,7 +15,7 @@ RUN apk add --no-cache \
   unzip \
   wget
 
-ARG HELM_VERSION=3.6.0
+ARG HELM_VERSION=3.6.1
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
     && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
     && rm /tmp/* \
