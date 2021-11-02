@@ -57,7 +57,7 @@ WORKDIR /home/helm
 
 RUN \
   helm plugin install https://github.com/databus23/helm-diff && \
-  helm plugin install helm plugin install https://github.com/jkroepke/helm-secrets --version v3.9.1 && \
+  helm plugin install https://github.com/jkroepke/helm-secrets --version v3.9.1 && \
   helm plugin install https://github.com/aslafy-z/helm-git.git
 
 LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator"
