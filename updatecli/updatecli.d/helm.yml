@@ -10,9 +10,8 @@ sources:
       token: "{{ requiredEnv .github.token }}"
       username: "{{ .github.username }}"
       versionFilter:
-        kind: latest
-    transformers:
-      - trimPrefix: "v"
+        kind: semver
+        pattern: ~3.6
 conditions:
   dockerfileArgHelmVersion:
     name: "Does the Dockerfile have an ARG instruction which key is HELM_VERSION?"
