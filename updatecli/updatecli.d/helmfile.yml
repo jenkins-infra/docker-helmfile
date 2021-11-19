@@ -16,6 +16,7 @@ conditions:
   dockerfileArgHelmfileVersion:
     name: "Does the Dockerfile have an ARG instruction which key is HELMFILE_VERSION?"
     kind: dockerfile
+    disablesourceinput: true
     spec:
       file: Dockerfile
       instruction:
@@ -24,19 +25,11 @@ conditions:
   testCstHelmfileVersion:
     name: "Update the value of HELMFILE_VERSION in the test harness"
     kind: yaml
+    disablesourceinput: true
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[2].key"
       value: io.jenkins-infra.tools.helmfile.version
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
 targets:
   updateCstHelmfileVersion:
     name: "Update the value of HELMFILE_VERSION in the test harness"
