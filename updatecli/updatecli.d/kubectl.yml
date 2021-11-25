@@ -13,7 +13,7 @@ sources:
       username: "{{ .github.username }}"
       versionFilter:
         kind: regex
-        pattern: "^kubernetes-1.19.(\\d*)$"
+        pattern: "^kubernetes-1.20.(\\d*)$"
 conditions:
   dockerfileArgKubectlVersion:
     name: "Does the Dockerfile have an ARG instruction which key is KUBECTL_VERSION?"
