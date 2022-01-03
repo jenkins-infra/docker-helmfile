@@ -1,0 +1,83 @@
+---
+title: "[helm-plugins] Update versions"
+sources:
+  lastHelmDiff:
+    kind: githubRelease
+    name: Get the latest helm version
+    spec:
+      owner: "databus23"
+      repository: "helm-diff"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+  lastHelmSecrets:
+    kind: githubRelease
+    name: Get the latest helm version
+    spec:
+      owner: "jkroepke"
+      repository: "helm-secrets"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+  lastHelmGit:
+    kind: githubRelease
+    name: Get the latest helm version
+    spec:
+      owner: "aslafy-z"
+      repository: "helm-git"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+# No conditions as these versions concern only github and not docker
+targets:
+  updateHelmDiff:
+    name: "Update helm-diff plugin version"
+    kind: dockerfile
+    sourceID: lastHelmDiff
+    spec:
+      file: Dockerfile
+      instruction:
+        keyword: "ARG"
+        matcher: "HELM_DIFF_VERSION"
+    scm:
+      github:
+        user: "{{ .github.user }}"
+        email: "{{ .github.email }}"
+        owner: "{{ .github.owner }}"
+        repository: "{{ .github.repository }}"
+        token: "{{ requiredEnv .github.token }}"
+        username: "{{ .github.username }}"
+        branch: "{{ .github.branch }}"
+  updateHelmSecrets:
+    name: "Update helm-secrets plugin version"
+    kind: dockerfile
+    sourceID: lastHelmSecrets
+    spec:
+      file: Dockerfile
+      instruction:
+        keyword: "ARG"
+        matcher: "HELM_SECRETS_VERSION"
+    scm:
+      github:
+        user: "{{ .github.user }}"
+        email: "{{ .github.email }}"
+        owner: "{{ .github.owner }}"
+        repository: "{{ .github.repository }}"
+        token: "{{ requiredEnv .github.token }}"
+        username: "{{ .github.username }}"
+        branch: "{{ .github.branch }}"
+  updateHelmGit:
+    name: "Update helm-git plugin version"
+    kind: dockerfile
+    sourceID: lastHelmGit
+    spec:
+      file: Dockerfile
+      instruction:
+        keyword: "ARG"
+        matcher: "HELM_GIT_VERSION"
+    scm:
+      github:
+        user: "{{ .github.user }}"
+        email: "{{ .github.email }}"
+        owner: "{{ .github.owner }}"
+        repository: "{{ .github.repository }}"
+        token: "{{ requiredEnv .github.token }}"
+        username: "{{ .github.username }}"
+        branch: "{{ .github.branch }}"
