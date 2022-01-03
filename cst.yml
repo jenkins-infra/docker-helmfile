@@ -12,6 +12,12 @@ metadataTest:
       value: "0.142.0"
     - key: "io.jenkins-infra.tools.helm.plugins"
       value: "helm-diff,helm-git,helm-secrets"
+    - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
+      value: "v3.1.3"
+    - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
+      value: "v3.9.1"
+    - key: "io.jenkins-infra.tools.helm.plugins.helm-git.version"
+      value: "v0.11.1"
     - key: io.jenkins-infra.tools.kubectl.version
       value: "1.20.14"
     - key: io.jenkins-infra.tools.sops.version

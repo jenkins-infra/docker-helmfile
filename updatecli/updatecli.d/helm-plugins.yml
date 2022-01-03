@@ -45,6 +45,22 @@ targets:
         token: "{{ requiredEnv .github.token }}"
         username: "{{ .github.username }}"
         branch: "{{ .github.branch }}"
+  updateCstHelmDiff:
+    name: "Update helm-diff plugin version in the test harness"
+    kind: yaml
+    sourceID: lastHelmDiff
+    spec:
+      file: "cst.yml"
+      key: "metadataTest.labels[8].value"
+    scm:
+      github:
+        user: "{{ .github.user }}"
+        email: "{{ .github.email }}"
+        owner: "{{ .github.owner }}"
+        repository: "{{ .github.repository }}"
+        token: "{{ requiredEnv .github.token }}"
+        username: "{{ .github.username }}"
+        branch: "{{ .github.branch }}"
   updateHelmSecrets:
     name: "Update helm-secrets plugin version"
     kind: dockerfile
@@ -63,6 +79,22 @@ targets:
         token: "{{ requiredEnv .github.token }}"
         username: "{{ .github.username }}"
         branch: "{{ .github.branch }}"
+  updateCstHelmSecrets:
+    name: "Update helm-secrets plugin version in the test harness"
+    kind: yaml
+    sourceID: lastHelmSecrets
+    spec:
+      file: "cst.yml"
+      key: "metadataTest.labels[9].value"
+    scm:
+      github:
+        user: "{{ .github.user }}"
+        email: "{{ .github.email }}"
+        owner: "{{ .github.owner }}"
+        repository: "{{ .github.repository }}"
+        token: "{{ requiredEnv .github.token }}"
+        username: "{{ .github.username }}"
+        branch: "{{ .github.branch }}"
   updateHelmGit:
     name: "Update helm-git plugin version"
     kind: dockerfile
@@ -72,6 +104,22 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "HELM_GIT_VERSION"
+    scm:
+      github:
+        user: "{{ .github.user }}"
+        email: "{{ .github.email }}"
+        owner: "{{ .github.owner }}"
+        repository: "{{ .github.repository }}"
+        token: "{{ requiredEnv .github.token }}"
+        username: "{{ .github.username }}"
+        branch: "{{ .github.branch }}"
+  updateCstHelmGit:
+    name: "Update helm-git plugin version in the test harness"
+    kind: yaml
+    sourceID: lastHelmGit
+    spec:
+      file: "cst.yml"
+      key: "metadataTest.labels[10].value"
     scm:
       github:
         user: "{{ .github.user }}"
