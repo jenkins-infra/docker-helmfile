@@ -42,6 +42,7 @@ RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSI
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
 ARG AWS_CLI_VERSION=1.19
 ARG YAMLLINT_VERSION=1.26
+ARG UPDATECLI_VERSION=v0.17.2
 # hadolint ignore=DL3018
 RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}" yamllint=~"${YAMLLINT_VERSION}" less groff \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
@@ -49,6 +50,12 @@ ARG AWS_IAM_AUTH_VERSION="1.19.6"
 RUN wget "https://amazon-eks.s3.us-west-2.amazonaws.com/${AWS_IAM_AUTH_VERSION}/2021-01-05/bin/linux/amd64/aws-iam-authenticator" --quiet --output-document=/usr/local/bin/aws-iam-authenticator \
   && chmod a+x /usr/local/bin/aws-iam-authenticator \
   && aws-iam-authenticator version
+
+RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_VERSION}/updatecli_Linux_x86_64.tar.gz" --quiet --output-document=/usr/local/bin/updatecli.tar.gz \
+  && tar zxf /usr/local/bin/updatecli.tar.gz -C /usr/local/bin/ \
+  && chmod a+x /usr/local/bin/updatecli \
+  && updatecli version \
+  && rm /usr/local/bin/updatecli.tar.gz
 
 USER jenkins
 
