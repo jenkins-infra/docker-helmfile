@@ -1,4 +1,4 @@
-FROM jenkins/inbound-agent:alpine-jdk11
+FROM jenkins/inbound-agent:4.11-1-alpine-jdk11
 USER root
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
@@ -71,6 +71,8 @@ LABEL io.jenkins-infra.tools.kubectl.version="${KUBECTL_VERSION}"
 LABEL io.jenkins-infra.tools.sops.version="${SOPS_VERSION}"
 LABEL io.jenkins-infra.tools.helmfile.version="${HELMFILE_VERSION}"
 LABEL io.jenkins-infra.tools.aws-cli.version="${AWS_CLI_VERSION}"
+LABEL io.jenkins-infra.tools.yamllint.version="${YAMLLINT_VERSION}"
+LABEL io.jenkins-infra.tools.updatecli.version="${UPDATECLI_VERSION}"
 LABEL io.jenkins-infra.tools.aws-iam-authenticator.version="latest"
 
 ENTRYPOINT ["/usr/local/bin/helmfile"]
