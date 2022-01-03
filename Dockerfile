@@ -1,5 +1,5 @@
-FROM alpine:3.13
-
+FROM jenkins/inbound-agent:alpine-jdk11
+USER root
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 ENV HELM_HOME="/home/helm/.helm"
@@ -40,20 +40,17 @@ RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSI
 
 ## Install aws CLiI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.18
+ARG AWS_CLI_VERSION=1.19
+ARG YAMLLINT_VERSION=1.26
 # hadolint ignore=DL3018
-RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}" less groff \
+RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}" yamllint=~"${YAMLLINT_VERSION}" less groff \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 ARG AWS_IAM_AUTH_VERSION="1.19.6"
 RUN wget "https://amazon-eks.s3.us-west-2.amazonaws.com/${AWS_IAM_AUTH_VERSION}/2021-01-05/bin/linux/amd64/aws-iam-authenticator" --quiet --output-document=/usr/local/bin/aws-iam-authenticator \
   && chmod a+x /usr/local/bin/aws-iam-authenticator \
   && aws-iam-authenticator version
 
-RUN adduser -D -u 1000 helm
-
-USER helm
-
-WORKDIR /home/helm
+USER jenkins
 
 RUN \
   helm plugin install https://github.com/databus23/helm-diff && \
