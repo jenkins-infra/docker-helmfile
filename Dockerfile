@@ -42,7 +42,7 @@ RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSI
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
 ARG AWS_CLI_VERSION=1.19
 ARG YAMLLINT_VERSION=1.26
-ARG UPDATECLI_VERSION=v0.17.2
+ARG UPDATECLI_VERSION=v0.16.1
 # hadolint ignore=DL3018
 RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}" yamllint=~"${YAMLLINT_VERSION}" less groff \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
@@ -64,7 +64,7 @@ RUN \
   helm plugin install https://github.com/jkroepke/helm-secrets --version v3.9.1 && \
   helm plugin install https://github.com/aslafy-z/helm-git.git
 
-LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator"
+LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
 LABEL io.jenkins-infra.tools.helm.plugins="helm-diff,helm-git,helm-secrets"
 LABEL io.jenkins-infra.tools.kubectl.version="${KUBECTL_VERSION}"
@@ -75,4 +75,4 @@ LABEL io.jenkins-infra.tools.yamllint.version="${YAMLLINT_VERSION}"
 LABEL io.jenkins-infra.tools.updatecli.version="${UPDATECLI_VERSION}"
 LABEL io.jenkins-infra.tools.aws-iam-authenticator.version="latest"
 
-ENTRYPOINT ["/usr/local/bin/helmfile"]
+ENTRYPOINT ["/usr/local/bin/jenkins-agent"]
