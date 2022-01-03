@@ -1,4 +1,4 @@
-FROM jenkins/inbound-agent:4.11-1-alpine-jdk11
+FROM jenkins/inbound-agent:4.11.2-2-alpine-jdk11
 USER root
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
