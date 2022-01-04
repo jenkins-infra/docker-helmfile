@@ -59,14 +59,20 @@ RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_V
 
 USER jenkins
 
+ARG HELM_DIFF_VERSION=v3.1.3
+ARG HELM_SECRETS_VERSION=v3.9.1
+ARG HELM_GIT_VERSION=v0.11.1
 RUN \
-  helm plugin install https://github.com/databus23/helm-diff && \
-  helm plugin install https://github.com/jkroepke/helm-secrets --version v3.9.1 && \
-  helm plugin install https://github.com/aslafy-z/helm-git.git
+  helm plugin install https://github.com/databus23/helm-diff --version ${HELM_DIFF_VERSION} && \
+  helm plugin install https://github.com/jkroepke/helm-secrets --version ${HELM_SECRETS_VERSION} && \
+  helm plugin install https://github.com/aslafy-z/helm-git.git --version ${HELM_GIT_VERSION}
 
 LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
 LABEL io.jenkins-infra.tools.helm.plugins="helm-diff,helm-git,helm-secrets"
+LABEL io.jenkins-infra.tools.helm.plugins.helm-diff.version="${HELM_DIFF_VERSION}"
+LABEL io.jenkins-infra.tools.helm.plugins.helm-secrets.version="${HELM_SECRETS_VERSION}"
+LABEL io.jenkins-infra.tools.helm.plugins.helm-git.version="${HELM_GIT_VERSION}"
 LABEL io.jenkins-infra.tools.kubectl.version="${KUBECTL_VERSION}"
 LABEL io.jenkins-infra.tools.sops.version="${SOPS_VERSION}"
 LABEL io.jenkins-infra.tools.helmfile.version="${HELMFILE_VERSION}"
