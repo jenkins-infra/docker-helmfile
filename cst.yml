@@ -5,7 +5,7 @@ metadataTest:
       value: "/home/helm/.helm"
   labels:
     - key: io.jenkins-infra.tools
-      value: "helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator"
+      value: "helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli"
     - key: io.jenkins-infra.tools.helm.version
       value: "3.6.3"
     - key: io.jenkins-infra.tools.helmfile.version
@@ -23,12 +23,12 @@ metadataTest:
     - key: io.jenkins-infra.tools.sops.version
       value: "3.7.1"
     - key: io.jenkins-infra.tools.aws-cli.version
-      value: "1.18"
+      value: "1.19"
     - key: io.jenkins-infra.tools.aws-iam-authenticator.version
       value: "latest"
-  entrypoint: ["/usr/local/bin/helmfile"]
+  entrypoint: ["/usr/local/bin/jenkins-agent"]
   cmd: []
-  workdir: "/home/helm"
+  workdir: "/home/jenkins"
 fileExistenceTests:
   - name: 'Bash'
     path: '/bin/bash'
@@ -78,14 +78,14 @@ fileExistenceTests:
     shouldExist: true
     isExecutableBy: 'any'
   - name: "Default user's home"
-    path: '/home/helm'
+    path: '/home/jenkins'
     shouldExist: true
   - name: "Helm Diff plugin"
-    path: '/home/helm/.local/share/helm/plugins/helm-diff'
+    path: '/home/jenkins/.local/share/helm/plugins/helm-diff'
     shouldExist: true
   - name: "Helm Git plugin"
-    path: '/home/helm/.local/share/helm/plugins/helm-git.git'
+    path: '/home/jenkins/.local/share/helm/plugins/helm-git.git'
     shouldExist: true
   - name: "Helm Secrets plugin"
-    path: '/home/helm/.local/share/helm/plugins/helm-secrets'
+    path: '/home/jenkins/.local/share/helm/plugins/helm-secrets'
     shouldExist: true
