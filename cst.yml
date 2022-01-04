@@ -23,7 +23,7 @@ metadataTest:
     - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
       value: "v3.1.3"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
-      value: "v3.9.1"
+      value: "v3.11.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-git.version"
       value: "v0.11.1"
   entrypoint: ["/usr/local/bin/jenkins-agent"]
