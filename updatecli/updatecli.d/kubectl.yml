@@ -1,5 +1,18 @@
 ---
 title: "[kubectl] Update version"
+
+scms:
+  default:
+    kind: github
+    spec:
+      user: "{{ .github.user }}"
+      email: "{{ .github.email }}"
+      owner: "{{ .github.owner }}"
+      repository: "{{ .github.repository }}"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+      branch: "{{ .github.branch }}"
+
 sources:
   default:
     kind: githubRelease
@@ -14,6 +27,7 @@ sources:
       versionFilter:
         kind: regex
         pattern: "^kubernetes-1.20.(\\d*)$"
+
 conditions:
   dockerfileArgKubectlVersion:
     name: "Does the Dockerfile have an ARG instruction which key is KUBECTL_VERSION?"
@@ -32,23 +46,16 @@ conditions:
       file: "cst.yml"
       key: "metadataTest.labels[4].key"
       value: "io.jenkins-infra.tools.kubectl.version"
+
 targets:
-  updateCstKubectlVersion:
+  updateCst:
     name: "Update the value of KUBECTL_VERSION in the test harness"
     kind: yaml
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[4].value"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
-  updateDockerfileArgKubectlVersion:
+    scmID: default
+  updateDockerfile:
     name: "Update the value of ARG KUBECTL_VERSION in the Dockerfile"
     kind: dockerfile
     spec:
@@ -56,12 +63,15 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "KUBECTL_VERSION"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
+    scmID: default
+
+pullrequests:
+  default:
+    kind: github
+    scmID: default
+    targets:
+      - updateCst
+      - updateDockerfile
+    spec:
+      labels:
+        - dependencies

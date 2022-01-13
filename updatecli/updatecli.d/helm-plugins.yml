@@ -1,5 +1,17 @@
----
 title: "[helm-plugins] Update versions"
+
+scms:
+  default:
+    kind: github
+    spec:
+      user: "{{ .github.user }}"
+      email: "{{ .github.email }}"
+      owner: "{{ .github.owner }}"
+      repository: "{{ .github.repository }}"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+      branch: "{{ .github.branch }}"
+
 sources:
   lastHelmDiff:
     kind: githubRelease
@@ -25,7 +37,7 @@ sources:
       repository: "helm-git"
       token: "{{ requiredEnv .github.token }}"
       username: "{{ .github.username }}"
-# No conditions as these versions concern only github and not docker
+
 targets:
   updateHelmDiff:
     name: "Update helm-diff plugin version"
@@ -36,15 +48,7 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "HELM_DIFF_VERSION"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
+    scmId: default
   updateCstHelmDiff:
     name: "Update helm-diff plugin version in the test harness"
     kind: yaml
@@ -52,15 +56,7 @@ targets:
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[8].value"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
+    scmID: default
   updateHelmSecrets:
     name: "Update helm-secrets plugin version"
     kind: dockerfile
@@ -70,15 +66,7 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "HELM_SECRETS_VERSION"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
+    scmID: default
   updateCstHelmSecrets:
     name: "Update helm-secrets plugin version in the test harness"
     kind: yaml
@@ -86,15 +74,7 @@ targets:
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[9].value"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
+    scmID: default
   updateHelmGit:
     name: "Update helm-git plugin version"
     kind: dockerfile
@@ -104,15 +84,7 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "HELM_GIT_VERSION"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
+    scmID: default
   updateCstHelmGit:
     name: "Update helm-git plugin version in the test harness"
     kind: yaml
@@ -120,12 +92,19 @@ targets:
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[10].value"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
+    scmID: default
+
+pullrequests:
+  default:
+    kind: github
+    scmID: default
+    targets:
+      - updateHelmDiff
+      - updateCstHelmDiff
+      - updateHelmSecrets
+      - updateCstHelmSecrets
+      - updateHelmGit
+      - updateCstHelmGit
+    spec:
+      labels:
+        - dependencies
