@@ -1,5 +1,18 @@
 ---
 title: "[helm] Update version"
+
+scms:
+  default:
+    kind: github
+    spec:
+      user: "{{ .github.user }}"
+      email: "{{ .github.email }}"
+      owner: "{{ .github.owner }}"
+      repository: "{{ .github.repository }}"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+      branch: "{{ .github.branch }}"
+
 sources:
   helm:
     kind: githubRelease
@@ -12,6 +25,7 @@ sources:
       versionFilter:
         kind: semver
         pattern: ~3.6
+
 conditions:
   dockerfileArgHelmVersion:
     name: "Does the Dockerfile have an ARG instruction which key is HELM_VERSION?"
@@ -30,23 +44,16 @@ conditions:
       file: "cst.yml"
       key: "metadataTest.labels[1].key"
       value: io.jenkins-infra.tools.helm.version
+
 targets:
-  updateCstHelmVersion:
+  updateCst:
     name: "Update the value of HELM_VERSION in the test harness"
     kind: yaml
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[1].value"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
-  updateDockerfileArgHelmVersion:
+    scmID: default
+  updateDockerfile:
     name: "Update the value of ARG HELM_VERSION in the Dockerfile"
     kind: dockerfile
     spec:
@@ -54,12 +61,15 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "HELM_VERSION"
-    scm:
-      github:
-        user: "{{ .github.user }}"
-        email: "{{ .github.email }}"
-        owner: "{{ .github.owner }}"
-        repository: "{{ .github.repository }}"
-        token: "{{ requiredEnv .github.token }}"
-        username: "{{ .github.username }}"
-        branch: "{{ .github.branch }}"
+    scmID: default
+
+pullrequests:
+  default:
+    kind: github
+    scmID: default
+    targets:
+      - updateCst
+      - updateDockerfile
+    spec:
+      labels:
+        - dependencies
