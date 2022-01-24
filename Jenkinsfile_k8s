@@ -1,1 +1,1 @@
-parallelDockerUpdatecli([imageName: 'helmfile', rebuildImageOnPeriodicJob: false])
+parallelDockerUpdatecli([imageName: 'helmfile', rebuildImageOnPeriodicJob: false, containerMemory: '768Mi'])
