@@ -48,7 +48,7 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "HELM_DIFF_VERSION"
-    scmId: default
+    scmID: default
   updateCstHelmDiff:
     name: "Update helm-diff plugin version in the test harness"
     kind: yaml
