@@ -1,4 +1,5 @@
-FROM jenkins/inbound-agent:4.11.2-2-alpine-jdk11
+ARG JENKINS_AGENT_VERSION=4.11.2-2-alpine-jdk11
+FROM jenkins/inbound-agent:${JENKINS_AGENT_VERSION}
 USER root
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
@@ -67,7 +68,11 @@ RUN \
   helm plugin install https://github.com/jkroepke/helm-secrets --version ${HELM_SECRETS_VERSION} && \
   helm plugin install https://github.com/aslafy-z/helm-git.git --version ${HELM_GIT_VERSION}
 
-LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli"
+
+## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
+ARG JENKINS_AGENT_VERSION=4.11.2-2-alpine-jdk11
+
+LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
 LABEL io.jenkins-infra.tools.helm.plugins="helm-diff,helm-git,helm-secrets"
 LABEL io.jenkins-infra.tools.helm.plugins.helm-diff.version="${HELM_DIFF_VERSION}"
@@ -80,5 +85,6 @@ LABEL io.jenkins-infra.tools.aws-cli.version="${AWS_CLI_VERSION}"
 LABEL io.jenkins-infra.tools.yamllint.version="${YAMLLINT_VERSION}"
 LABEL io.jenkins-infra.tools.updatecli.version="${UPDATECLI_VERSION}"
 LABEL io.jenkins-infra.tools.aws-iam-authenticator.version="latest"
+LABEL io.jenkins-infra.tools.jenkins-agent.version="${JENKINS_AGENT_VERSION}"
 
 ENTRYPOINT ["/usr/local/bin/jenkins-agent"]
