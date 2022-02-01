@@ -57,7 +57,7 @@ targets:
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[12].value"
-    #scmID: default
+    scmID: default
   updateDockerfileVersion:
     name: "Update the value of ARG JENKINS_AGENT_VERSION in the Dockerfile"
     sourceID: lastVersion
@@ -69,7 +69,7 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "JENKINS_AGENT_VERSION"
-    #scmID: default
+    scmID: default
 
 pullrequests:
   default:
