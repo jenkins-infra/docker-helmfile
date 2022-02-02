@@ -51,6 +51,7 @@ conditions:
     sourceID: lastVersion
     spec:
       image: "jenkins/inbound-agent" # How can I add the version that is above here ?
+      architecture: "amd64"
       ## tag comes from the source
 
 
