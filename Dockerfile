@@ -61,7 +61,7 @@ RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_V
 USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.4.0
-ARG HELM_SECRETS_VERSION=v3.11.0
+ARG HELM_SECRETS_VERSION=v3.12.0
 ARG HELM_GIT_VERSION=v0.11.1
 RUN \
   helm plugin install https://github.com/databus23/helm-diff --version ${HELM_DIFF_VERSION} && \
