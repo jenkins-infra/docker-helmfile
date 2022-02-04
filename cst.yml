@@ -5,7 +5,7 @@ metadataTest:
       value: "/home/helm/.helm"
   labels:
     - key: io.jenkins-infra.tools
-      value: "helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli"
+      value: "helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent"
     - key: io.jenkins-infra.tools.helm.version
       value: "3.6.3"
     - key: io.jenkins-infra.tools.helmfile.version
@@ -28,6 +28,8 @@ metadataTest:
       value: "v0.11.1"
     - key: "io.jenkins-infra.tools.updatecli.version"
       value: "v0.18.3"
+    - key: "io.jenkins-infra.tools.jenkins-agent.version"
+      value: "4.11.2-2-alpine-jdk11"
   entrypoint: ["/usr/local/bin/jenkins-agent"]
   cmd: []
   workdir: "/home/jenkins"
