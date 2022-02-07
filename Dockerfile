@@ -1,4 +1,4 @@
-ARG JENKINS_AGENT_VERSION=4.11.2-2-alpine-jdk11
+ARG JENKINS_AGENT_VERSION=4.11.2-4-alpine-jdk11
 FROM jenkins/inbound-agent:${JENKINS_AGENT_VERSION}
 USER root
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
@@ -70,7 +70,7 @@ RUN \
 
 
 ## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
-ARG JENKINS_AGENT_VERSION=4.11.2-2-alpine-jdk11
+ARG JENKINS_AGENT_VERSION=4.11.2-4-alpine-jdk11
 
 LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
