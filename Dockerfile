@@ -61,7 +61,7 @@ RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_V
 
 # Install doctl
 ARG DOCTL_VERSION=1.70.0
-RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/doctl.tar.tgz \
+RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/doctl.tar.gz \
   && tar zxf /tmp/doctl.tar.gz -C /usr/local/bin/ \
   && rm /tmp/doctl.tar.gz \
   && chmod +x /usr/local/bin/doctl \
