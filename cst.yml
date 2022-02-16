@@ -5,7 +5,7 @@ metadataTest:
       value: "/home/helm/.helm"
   labels:
     - key: io.jenkins-infra.tools
-      value: "helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent"
+      value: "helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent,doctl"
     - key: io.jenkins-infra.tools.helm.version
       value: "3.6.3"
     - key: io.jenkins-infra.tools.helmfile.version
@@ -30,6 +30,8 @@ metadataTest:
       value: "v0.19.2"
     - key: "io.jenkins-infra.tools.jenkins-agent.version"
       value: "4.11.2-4-alpine-jdk11"
+    - key: "io.jenkins-infra.tools.doctl.version"
+      value: "1.70.0"
   entrypoint: ["/usr/local/bin/jenkins-agent"]
   cmd: []
   workdir: "/home/jenkins"
@@ -93,3 +95,7 @@ fileExistenceTests:
   - name: "Helm Secrets plugin"
     path: '/home/jenkins/.local/share/helm/plugins/helm-secrets'
     shouldExist: true
+  - name: 'doctl'
+    path: '/usr/bin/doctl'
+    shouldExist: true
+    isExecutableBy: 'any'

@@ -39,7 +39,7 @@ RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSI
   && chmod +x /usr/local/bin/helmfile \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
-## Install aws CLiI tools
+## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
 ARG AWS_CLI_VERSION=1.19
 ARG YAMLLINT_VERSION=1.26
@@ -52,11 +52,20 @@ RUN wget "https://amazon-eks.s3.us-west-2.amazonaws.com/${AWS_IAM_AUTH_VERSION}/
   && chmod a+x /usr/local/bin/aws-iam-authenticator \
   && aws-iam-authenticator version
 
+# Install updatecli
 RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_VERSION}/updatecli_Linux_x86_64.tar.gz" --quiet --output-document=/usr/local/bin/updatecli.tar.gz \
   && tar zxf /usr/local/bin/updatecli.tar.gz -C /usr/local/bin/ \
   && chmod a+x /usr/local/bin/updatecli \
   && updatecli version \
   && rm /usr/local/bin/updatecli.tar.gz
+
+# Install doctl
+ARG DOCTL_VERSION=1.70.0
+RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/doctl.tar.tgz \
+  && tar zxf /tmp/doctl.tar.gz -C /usr/local/bin/ \
+  && rm /tmp/doctl.tar.gz \
+  && chmod +x /usr/local/bin/doctl \
+  && doctl version | grep -q "${DOCTL_VERSION}"
 
 USER jenkins
 
@@ -72,7 +81,7 @@ RUN \
 ## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
 ARG JENKINS_AGENT_VERSION=4.11.2-4-alpine-jdk11
 
-LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent"
+LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent,doctl"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
 LABEL io.jenkins-infra.tools.helm.plugins="helm-diff,helm-git,helm-secrets"
 LABEL io.jenkins-infra.tools.helm.plugins.helm-diff.version="${HELM_DIFF_VERSION}"
@@ -86,5 +95,6 @@ LABEL io.jenkins-infra.tools.yamllint.version="${YAMLLINT_VERSION}"
 LABEL io.jenkins-infra.tools.updatecli.version="${UPDATECLI_VERSION}"
 LABEL io.jenkins-infra.tools.aws-iam-authenticator.version="latest"
 LABEL io.jenkins-infra.tools.jenkins-agent.version="${JENKINS_AGENT_VERSION}"
+LABEL io.jenkins-infra.tools.doctl.version="${DOCTL_VERSION}"
 
 ENTRYPOINT ["/usr/local/bin/jenkins-agent"]
