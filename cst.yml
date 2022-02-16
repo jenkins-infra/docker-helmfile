@@ -96,6 +96,6 @@ fileExistenceTests:
     path: '/home/jenkins/.local/share/helm/plugins/helm-secrets'
     shouldExist: true
   - name: 'doctl'
-    path: '/usr/bin/doctl'
+    path: '/usr/local/bin/doctl'
     shouldExist: true
     isExecutableBy: 'any'
