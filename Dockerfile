@@ -69,7 +69,7 @@ RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSI
 
 USER jenkins
 
-ARG HELM_DIFF_VERSION=v3.4.0
+ARG HELM_DIFF_VERSION=v3.4.2
 ARG HELM_SECRETS_VERSION=v3.12.0
 ARG HELM_GIT_VERSION=v0.11.1
 RUN \
