@@ -70,6 +70,14 @@ RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSI
   && chmod +x /usr/local/bin/doctl \
   && doctl version | grep -q "${DOCTL_VERSION}"
 
+ARG RUBY_VERSION=3.0
+## Always use the latest Gem and package versions
+# hadolint ignore=DL3028,DL3018
+RUN apk add --no-cache --virtual .build-deps build-base openssl-dev ruby-dev \
+  && apk add --no-cache openssl ruby=~"${RUBY_VERSION}" \
+  && gem install --no-document graphql-client httparty jwt time openssl base64 \
+  && apk del --purge .build-deps
+
 USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.4.2
@@ -84,7 +92,7 @@ RUN \
 ## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
 ARG JENKINS_AGENT_VERSION=4.11.2-4-alpine-jdk11
 
-LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent,doctl"
+LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent,doctl,jq,yq,ruby"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
 LABEL io.jenkins-infra.tools.helm.plugins="helm-diff,helm-git,helm-secrets"
 LABEL io.jenkins-infra.tools.helm.plugins.helm-diff.version="${HELM_DIFF_VERSION}"
@@ -99,5 +107,6 @@ LABEL io.jenkins-infra.tools.updatecli.version="${UPDATECLI_VERSION}"
 LABEL io.jenkins-infra.tools.aws-iam-authenticator.version="latest"
 LABEL io.jenkins-infra.tools.jenkins-agent.version="${JENKINS_AGENT_VERSION}"
 LABEL io.jenkins-infra.tools.doctl.version="${DOCTL_VERSION}"
+LABEL io.jenkins-infra.tools.ruby.version="${RUBY_VERSION}"
 
 ENTRYPOINT ["/usr/local/bin/jenkins-agent"]
