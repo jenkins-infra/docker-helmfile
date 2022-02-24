@@ -5,6 +5,7 @@ SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 ENV HELM_HOME="/home/helm/.helm"
 
+## Always use the latest Alpine packages
 # hadolint ignore=DL3018
 RUN apk add --no-cache \
   ca-certificates \
@@ -12,9 +13,11 @@ RUN apk add --no-cache \
   bash \
   git \
   gnupg \
+  jq \
   tar \
   unzip \
-  wget
+  wget \
+  yq
 
 ARG HELM_VERSION=3.6.3
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
