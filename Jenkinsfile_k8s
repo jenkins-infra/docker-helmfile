@@ -1,1 +1,7 @@
-parallelDockerUpdatecli([imageName: 'helmfile', rebuildImageOnPeriodicJob: false, containerMemory: '768Mi'])
+@Library('pipeline-library@pull/311/head') _
+
+ buildDockerAndPublishImage('helmfile', [
+  automaticSemanticVersioning: true,
+  gitCredentials: 'github-app-infra',
+  useContainer: false,
+])
