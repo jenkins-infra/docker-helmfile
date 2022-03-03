@@ -1,6 +1,4 @@
-@Library('pipeline-library@pull/311/head') _
-
- buildDockerAndPublishImage('helmfile', [
+buildDockerAndPublishImage('helmfile', [
   automaticSemanticVersioning: true,
   gitCredentials: 'github-app-infra',
   useContainer: false,
