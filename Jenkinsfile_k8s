@@ -1,5 +1,10 @@
-buildDockerAndPublishImage('helmfile', [
-  automaticSemanticVersioning: true,
-  gitCredentials: 'github-app-infra',
-  useContainer: false,
+parallelDockerUpdatecli([
+  imageName: 'helmfile',
+  rebuildImageOnPeriodicJob: false,
+  containerMemory: '768Mi',
+  buildDockerConfig: [
+    automaticSemanticVersioning: true,
+    gitCredentials: 'github-app-infra',
+    useContainer: false,
+  ]
 ])
