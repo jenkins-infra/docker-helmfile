@@ -1,6 +1,6 @@
 parallelDockerUpdatecli([
   imageName: 'helmfile',
   rebuildImageOnPeriodicJob: false,
-  containerMemory: '768Mi',
-  buildDockerConfig: [useContainer: false]
+  updatecliConfig: [containerMemory: '768Mi'],
+  buildDockerConfig: [useContainer: false],
 ])
