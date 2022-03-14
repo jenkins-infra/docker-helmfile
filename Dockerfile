@@ -46,7 +46,7 @@ RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSI
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
 ARG AWS_CLI_VERSION=1.19
 ARG YAMLLINT_VERSION=1.26
-ARG UPDATECLI_VERSION=v0.21.0
+ARG UPDATECLI_VERSION=v0.22.0
 # hadolint ignore=DL3018
 RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}" yamllint=~"${YAMLLINT_VERSION}" less groff \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
