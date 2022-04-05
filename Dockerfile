@@ -116,5 +116,6 @@ LABEL io.jenkins-infra.tools.aws-iam-authenticator.version="latest"
 LABEL io.jenkins-infra.tools.jenkins-agent.version="${JENKINS_AGENT_VERSION}"
 LABEL io.jenkins-infra.tools.doctl.version="${DOCTL_VERSION}"
 LABEL io.jenkins-infra.tools.ruby.version="${RUBY_VERSION}"
+LABEL io.jenkins-infra.tools.azure-cli.version="${AZ_CLI_VERSION}"
 
 ENTRYPOINT ["/usr/local/bin/jenkins-agent"]
