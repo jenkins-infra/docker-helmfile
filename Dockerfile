@@ -21,14 +21,14 @@ RUN apk add --no-cache \
 
 ARG HELM_VERSION=3.6.3
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
-    && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
-    && rm /tmp/* \
-    && helm version | grep -q "${HELM_VERSION}"
+  && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
+  && rm /tmp/* \
+  && helm version | grep -q "${HELM_VERSION}"
 
 ARG KUBECTL_VERSION=1.20.15
 RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" --quiet --output-document=/usr/local/bin/kubectl \
-    && chmod +x /usr/local/bin/kubectl \
-    && kubectl version --client | grep -q "${KUBECTL_VERSION}"
+  && chmod +x /usr/local/bin/kubectl \
+  && kubectl version --client | grep -q "${KUBECTL_VERSION}"
 
 # Install sops
 ARG SOPS_VERSION=3.7.2
@@ -69,6 +69,14 @@ RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSI
   && rm /tmp/doctl.tar.gz \
   && chmod +x /usr/local/bin/doctl \
   && doctl version | grep -q "${DOCTL_VERSION}"
+
+## Install Azure Cli
+ARG AZ_CLI_VERSION=2.34.1
+# hadolint ignore=DL3013,DL3018
+RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-dev openssl-dev cargo make \
+  && apk add --no-cache py3-pip py3-pynacl py3-cryptography \
+  && python3 -m pip install --no-cache-dir azure-cli=="${AZ_CLI_VERSION}" \
+  && apk del .az-build-deps
 
 ARG RUBY_VERSION=3.0
 ## Always use the latest Gem and package versions
