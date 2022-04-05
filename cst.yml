@@ -5,7 +5,7 @@ metadataTest:
       value: "/home/helm/.helm"
   labels:
     - key: io.jenkins-infra.tools
-      value: "helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent,doctl,jq,yq,ruby"
+      value: "helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,azure-cli,yamllint,updatecli,jenkins-agent,doctl,jq,yq,ruby"
     - key: io.jenkins-infra.tools.helm.version
       value: "3.6.3"
     - key: io.jenkins-infra.tools.helmfile.version
@@ -34,70 +34,72 @@ metadataTest:
       value: "1.72.0"
     - key: "io.jenkins-infra.tools.ruby.version"
       value: "3.0"
+    - key: io.jenkins-infra.tools.azure-cli.version
+      value: "2.34.1"
   entrypoint: ["/usr/local/bin/jenkins-agent"]
   cmd: []
   workdir: "/home/jenkins"
 fileExistenceTests:
-  - name: 'Bash'
-    path: '/bin/bash'
+  - name: "Bash"
+    path: "/bin/bash"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'Curl'
-    path: '/usr/bin/curl'
+    isExecutableBy: "any"
+  - name: "Curl"
+    path: "/usr/bin/curl"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'Git'
-    path: '/usr/bin/git'
+    isExecutableBy: "any"
+  - name: "Git"
+    path: "/usr/bin/git"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'wget'
-    path: '/usr/bin/wget'
+    isExecutableBy: "any"
+  - name: "wget"
+    path: "/usr/bin/wget"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'GPG2'
-    path: '/usr/bin/gpg2'
+    isExecutableBy: "any"
+  - name: "GPG2"
+    path: "/usr/bin/gpg2"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'Ca Cert'
-    path: '/usr/share/ca-certificates'
+    isExecutableBy: "any"
+  - name: "Ca Cert"
+    path: "/usr/share/ca-certificates"
     shouldExist: true
-  - name: 'Helm CLI'
-    path: '/usr/local/bin/helm'
+  - name: "Helm CLI"
+    path: "/usr/local/bin/helm"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'Kubectl CLI'
-    path: '/usr/local/bin/kubectl'
+    isExecutableBy: "any"
+  - name: "Kubectl CLI"
+    path: "/usr/local/bin/kubectl"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'Helmfile CLI'
-    path: '/usr/local/bin/helmfile'
+    isExecutableBy: "any"
+  - name: "Helmfile CLI"
+    path: "/usr/local/bin/helmfile"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'SOPS CLI'
-    path: '/usr/local/bin/sops'
+    isExecutableBy: "any"
+  - name: "SOPS CLI"
+    path: "/usr/local/bin/sops"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'AWS CLI'
-    path: '/usr/bin/aws'
+    isExecutableBy: "any"
+  - name: "AWS CLI"
+    path: "/usr/bin/aws"
     shouldExist: true
-    isExecutableBy: 'any'
-  - name: 'AWS Authenticator'
-    path: '/usr/local/bin/aws-iam-authenticator'
+    isExecutableBy: "any"
+  - name: "AWS Authenticator"
+    path: "/usr/local/bin/aws-iam-authenticator"
     shouldExist: true
-    isExecutableBy: 'any'
+    isExecutableBy: "any"
   - name: "Default user's home"
-    path: '/home/jenkins'
+    path: "/home/jenkins"
     shouldExist: true
   - name: "Helm Diff plugin"
-    path: '/home/jenkins/.local/share/helm/plugins/helm-diff'
+    path: "/home/jenkins/.local/share/helm/plugins/helm-diff"
     shouldExist: true
   - name: "Helm Git plugin"
-    path: '/home/jenkins/.local/share/helm/plugins/helm-git.git'
+    path: "/home/jenkins/.local/share/helm/plugins/helm-git.git"
     shouldExist: true
   - name: "Helm Secrets plugin"
-    path: '/home/jenkins/.local/share/helm/plugins/helm-secrets'
+    path: "/home/jenkins/.local/share/helm/plugins/helm-secrets"
     shouldExist: true
-  - name: 'doctl'
-    path: '/usr/local/bin/doctl'
+  - name: "doctl"
+    path: "/usr/local/bin/doctl"
     shouldExist: true
-    isExecutableBy: 'any'
+    isExecutableBy: "any"
