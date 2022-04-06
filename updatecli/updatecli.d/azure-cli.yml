@@ -1,5 +1,4 @@
----
-title: "Bump azcli version"
+title: "Bump azure-cli version"
 
 scms:
   default:
@@ -16,7 +15,7 @@ scms:
 sources:
   getAzCliVersion:
     kind: githubRelease
-    name: Get the latest AzCli version
+    name: Get the latest azure-cli version
     spec:
       owner: "Azure"
       repository: "azure-cli"
@@ -78,3 +77,4 @@ pullrequests:
     spec:
       labels:
         - dependencies
+        - azure-cli

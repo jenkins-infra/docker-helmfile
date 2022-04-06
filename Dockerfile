@@ -100,7 +100,7 @@ RUN \
 ## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
 ARG JENKINS_AGENT_VERSION=4.13-1-alpine-jdk11
 
-LABEL io.jenkins-infra.tools="helm,kubectl,helmfile,sops,aws-cli,aws-iam-authenticator,yamllint,updatecli,jenkins-agent,doctl,jq,yq,ruby"
+LABEL io.jenkins-infra.tools="aws-cli,aws-iam-authenticator,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,ruby,sops,updatecli,yamllint,yq"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
 LABEL io.jenkins-infra.tools.helm.plugins="helm-diff,helm-git,helm-secrets"
 LABEL io.jenkins-infra.tools.helm.plugins.helm-diff.version="${HELM_DIFF_VERSION}"
