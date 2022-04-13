@@ -89,7 +89,7 @@ RUN apk add --no-cache --virtual .build-deps build-base openssl-dev ruby-dev \
 USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.4.2
-ARG HELM_SECRETS_VERSION=v3.12.0
+ARG HELM_SECRETS_VERSION=v3.13.0
 ARG HELM_GIT_VERSION=v0.11.1
 RUN \
   helm plugin install https://github.com/databus23/helm-diff --version ${HELM_DIFF_VERSION} && \
