@@ -24,7 +24,6 @@ sources:
       username: "{{ .github.username }}"
       versionFilter:
         kind: semver
-        pattern: ~3.6
 
 conditions:
   dockerfileArgHelmVersion:
