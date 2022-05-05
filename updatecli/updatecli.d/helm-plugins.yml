@@ -14,7 +14,7 @@ scms:
 
 sources:
   lastHelmDiff:
-    kind: githubRelease
+    kind: githubrelease
     name: Get the latest helm version
     spec:
       owner: "databus23"
@@ -22,7 +22,7 @@ sources:
       token: "{{ requiredEnv .github.token }}"
       username: "{{ .github.username }}"
   lastHelmSecrets:
-    kind: githubRelease
+    kind: githubrelease
     name: Get the latest helm version
     spec:
       owner: "jkroepke"
@@ -30,7 +30,7 @@ sources:
       token: "{{ requiredEnv .github.token }}"
       username: "{{ .github.username }}"
   lastHelmGit:
-    kind: githubRelease
+    kind: githubrelease
     name: Get the latest helm version
     spec:
       owner: "aslafy-z"
@@ -42,62 +42,62 @@ targets:
   updateHelmDiff:
     name: "Update helm-diff plugin version"
     kind: dockerfile
-    sourceID: lastHelmDiff
+    sourceid: lastHelmDiff
     spec:
       file: Dockerfile
       instruction:
         keyword: "ARG"
         matcher: "HELM_DIFF_VERSION"
-    scmID: default
+    scmid: default
   updateCstHelmDiff:
     name: "Update helm-diff plugin version in the test harness"
     kind: yaml
-    sourceID: lastHelmDiff
+    sourceid: lastHelmDiff
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[8].value"
-    scmID: default
+    scmid: default
   updateHelmSecrets:
     name: "Update helm-secrets plugin version"
     kind: dockerfile
-    sourceID: lastHelmSecrets
+    sourceid: lastHelmSecrets
     spec:
       file: Dockerfile
       instruction:
         keyword: "ARG"
         matcher: "HELM_SECRETS_VERSION"
-    scmID: default
+    scmid: default
   updateCstHelmSecrets:
     name: "Update helm-secrets plugin version in the test harness"
     kind: yaml
-    sourceID: lastHelmSecrets
+    sourceid: lastHelmSecrets
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[9].value"
-    scmID: default
+    scmid: default
   updateHelmGit:
     name: "Update helm-git plugin version"
     kind: dockerfile
-    sourceID: lastHelmGit
+    sourceid: lastHelmGit
     spec:
       file: Dockerfile
       instruction:
         keyword: "ARG"
         matcher: "HELM_GIT_VERSION"
-    scmID: default
+    scmid: default
   updateCstHelmGit:
     name: "Update helm-git plugin version in the test harness"
     kind: yaml
-    sourceID: lastHelmGit
+    sourceid: lastHelmGit
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[10].value"
-    scmID: default
+    scmid: default
 
 pullrequests:
   default:
     kind: github
-    scmID: default
+    scmid: default
     targets:
       - updateHelmDiff
       - updateCstHelmDiff

@@ -15,14 +15,14 @@ scms:
 
 sources:
   default:
-    kind: githubRelease
+    kind: githubrelease
     name: Get the latest SOPS version
     spec:
       owner: "mozilla"
       repository: "sops"
       token: "{{ requiredEnv .github.token }}"
       username: "{{ .github.username }}"
-      versionFilter:
+      versionfilter:
         kind: semver
         pattern: "~3"
 
@@ -52,7 +52,7 @@ targets:
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[5].value"
-    scmID: default
+    scmid: default
   updateDockerfile:
     name: "Update the value of ARG SOPS_VERSION in the Dockerfile"
     kind: dockerfile
@@ -61,12 +61,12 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "SOPS_VERSION"
-    scmID: default
+    scmid: default
 
 pullrequests:
   default:
     kind: github
-    scmID: default
+    scmid: default
     targets:
       - updateCst
       - updateDockerfile

@@ -15,14 +15,14 @@ scms:
 
 sources:
   helm:
-    kind: githubRelease
+    kind: githubrelease
     name: Get the latest helm version
     spec:
       owner: "helm"
       repository: "helm"
       token: "{{ requiredEnv .github.token }}"
       username: "{{ .github.username }}"
-      versionFilter:
+      versionfilter:
         kind: semver
 
 conditions:
@@ -51,7 +51,7 @@ targets:
     spec:
       file: "cst.yml"
       key: "metadataTest.labels[1].value"
-    scmID: default
+    scmid: default
   updateDockerfile:
     name: "Update the value of ARG HELM_VERSION in the Dockerfile"
     kind: dockerfile
@@ -60,12 +60,12 @@ targets:
       instruction:
         keyword: "ARG"
         matcher: "HELM_VERSION"
-    scmID: default
+    scmid: default
 
 pullrequests:
   default:
     kind: github
-    scmID: default
+    scmid: default
     targets:
       - updateCst
       - updateDockerfile
