@@ -31,7 +31,7 @@ RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_V
   && kubectl version --client | grep -q "${KUBECTL_VERSION}"
 
 # Install sops
-ARG SOPS_VERSION=3.7.2
+ARG SOPS_VERSION=3.7.3
 RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.amd64" --quiet --output-document=/usr/local/bin/sops \
   && chmod +x /usr/local/bin/sops \
   && sops --version | grep -q "${SOPS_VERSION}"
@@ -55,7 +55,7 @@ RUN wget "https://amazon-eks.s3.us-west-2.amazonaws.com/${AWS_IAM_AUTH_VERSION}/
   && aws-iam-authenticator version
 
 # Install updatecli
-ARG UPDATECLI_VERSION=v0.24.0
+ARG UPDATECLI_VERSION=v0.25.0
 RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_VERSION}/updatecli_Linux_x86_64.tar.gz" --quiet --output-document=/usr/local/bin/updatecli.tar.gz \
   && tar zxf /usr/local/bin/updatecli.tar.gz -C /usr/local/bin/ \
   && chmod a+x /usr/local/bin/updatecli \
