@@ -21,7 +21,7 @@ metadataTest:
     - key: io.jenkins-infra.tools.aws-iam-authenticator.version
       value: "latest"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
-      value: "v3.4.2"
+      value: "v3.5.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
       value: "v3.13.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-git.version"

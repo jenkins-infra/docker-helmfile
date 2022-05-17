@@ -88,7 +88,7 @@ RUN apk add --no-cache --virtual .build-deps build-base openssl-dev ruby-dev \
 
 USER jenkins
 
-ARG HELM_DIFF_VERSION=v3.4.2
+ARG HELM_DIFF_VERSION=v3.5.0
 ARG HELM_SECRETS_VERSION=v3.13.0
 ARG HELM_GIT_VERSION=v0.11.1
 RUN \
