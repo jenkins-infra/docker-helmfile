@@ -19,7 +19,7 @@ RUN apk add --no-cache \
   wget \
   yq
 
-ARG HELM_VERSION=3.8.2
+ARG HELM_VERSION=3.9.0
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm /tmp/* \

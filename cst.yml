@@ -7,7 +7,7 @@ metadataTest:
     - key: io.jenkins-infra.tools
       value: "aws-cli,aws-iam-authenticator,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,ruby,sops,updatecli,yamllint,yq"
     - key: io.jenkins-infra.tools.helm.version
-      value: "3.8.2"
+      value: "3.9.0"
     - key: io.jenkins-infra.tools.helmfile.version
       value: "0.144.0"
     - key: "io.jenkins-infra.tools.helm.plugins"
