@@ -19,7 +19,7 @@ RUN apk add --no-cache \
   wget \
   yq
 
-ARG HELM_VERSION=3.8.2
+ARG HELM_VERSION=3.9.0
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm /tmp/* \
@@ -63,7 +63,7 @@ RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_V
   && rm /usr/local/bin/updatecli.tar.gz
 
 # Install doctl
-ARG DOCTL_VERSION=1.75.0
+ARG DOCTL_VERSION=1.76.0
 RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/doctl.tar.gz \
   && tar zxf /tmp/doctl.tar.gz -C /usr/local/bin/ \
   && rm /tmp/doctl.tar.gz \
@@ -71,7 +71,7 @@ RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSI
   && doctl version | grep -q "${DOCTL_VERSION}"
 
 ## Install Azure Cli
-ARG AZ_CLI_VERSION=2.36.0
+ARG AZ_CLI_VERSION=2.37.0
 # hadolint ignore=DL3013,DL3018
 RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-dev openssl-dev cargo make \
   && apk add --no-cache py3-pip py3-pynacl py3-cryptography \
@@ -88,7 +88,7 @@ RUN apk add --no-cache --virtual .build-deps build-base openssl-dev ruby-dev \
 
 USER jenkins
 
-ARG HELM_DIFF_VERSION=v3.4.2
+ARG HELM_DIFF_VERSION=v3.5.0
 ARG HELM_SECRETS_VERSION=v3.13.0
 ARG HELM_GIT_VERSION=v0.11.1
 RUN \

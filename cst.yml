@@ -7,7 +7,7 @@ metadataTest:
     - key: io.jenkins-infra.tools
       value: "aws-cli,aws-iam-authenticator,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,ruby,sops,updatecli,yamllint,yq"
     - key: io.jenkins-infra.tools.helm.version
-      value: "3.8.2"
+      value: "3.9.0"
     - key: io.jenkins-infra.tools.helmfile.version
       value: "0.144.0"
     - key: "io.jenkins-infra.tools.helm.plugins"
@@ -21,7 +21,7 @@ metadataTest:
     - key: io.jenkins-infra.tools.aws-iam-authenticator.version
       value: "latest"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
-      value: "v3.4.2"
+      value: "v3.5.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
       value: "v3.13.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-git.version"
@@ -31,11 +31,11 @@ metadataTest:
     - key: "io.jenkins-infra.tools.jenkins-agent.version"
       value: "4.13-2-alpine-jdk11"
     - key: "io.jenkins-infra.tools.doctl.version"
-      value: "1.75.0"
+      value: "1.76.0"
     - key: "io.jenkins-infra.tools.ruby.version"
       value: "3.0"
     - key: io.jenkins-infra.tools.azure-cli.version
-      value: "2.36.0"
+      value: "2.37.0"
   entrypoint: ["/usr/local/bin/jenkins-agent"]
   cmd: []
   workdir: "/home/jenkins"
