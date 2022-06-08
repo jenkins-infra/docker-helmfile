@@ -90,7 +90,7 @@ USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.5.0
 ARG HELM_SECRETS_VERSION=v3.13.0
-ARG HELM_GIT_VERSION=v0.11.1
+ARG HELM_GIT_VERSION=v0.11.2
 RUN \
   helm plugin install https://github.com/databus23/helm-diff --version ${HELM_DIFF_VERSION} && \
   helm plugin install https://github.com/jkroepke/helm-secrets --version ${HELM_SECRETS_VERSION} && \
