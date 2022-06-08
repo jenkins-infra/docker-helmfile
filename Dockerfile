@@ -13,7 +13,10 @@ RUN apk add --no-cache \
   bash \
   git \
   gnupg \
+  groff \
   jq \
+  less \
+  py-pip \
   tar \
   unzip \
   wget \
@@ -42,12 +45,14 @@ RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSI
   && chmod +x /usr/local/bin/helmfile \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
+ARG YAMLLINT_VERSION=1.26
+RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
+  && yamllint --version | grep -q "${YAMLLINT_VERSION}"
+
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.19
-ARG YAMLLINT_VERSION=1.26
-# hadolint ignore=DL3018
-RUN apk add --no-cache aws-cli=~"${AWS_CLI_VERSION}" yamllint=~"${YAMLLINT_VERSION}" less groff \
+ARG AWS_CLI_VERSION=1.25.4
+RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 ARG AWS_IAM_AUTH_VERSION="1.19.6"
 RUN wget "https://amazon-eks.s3.us-west-2.amazonaws.com/${AWS_IAM_AUTH_VERSION}/2021-01-05/bin/linux/amd64/aws-iam-authenticator" --quiet --output-document=/usr/local/bin/aws-iam-authenticator \
