@@ -5,7 +5,7 @@ metadataTest:
       value: "/home/helm/.helm"
   labels:
     - key: io.jenkins-infra.tools
-      value: "aws-cli,aws-iam-authenticator,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,ruby,sops,updatecli,yamllint,yq"
+      value: "aws-cli,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,ruby,sops,updatecli,yamllint,yq"
     - key: io.jenkins-infra.tools.helm.version
       value: "3.9.0"
     - key: io.jenkins-infra.tools.helmfile.version
@@ -18,8 +18,6 @@ metadataTest:
       value: "3.7.3"
     - key: io.jenkins-infra.tools.aws-cli.version
       value: "1.25.4"
-    - key: io.jenkins-infra.tools.aws-iam-authenticator.version
-      value: "latest"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
       value: "v3.5.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
@@ -81,10 +79,6 @@ fileExistenceTests:
     isExecutableBy: "any"
   - name: "AWS CLI"
     path: "/usr/bin/aws"
-    shouldExist: true
-    isExecutableBy: "any"
-  - name: "AWS Authenticator"
-    path: "/usr/local/bin/aws-iam-authenticator"
     shouldExist: true
     isExecutableBy: "any"
   - name: "Default user's home"

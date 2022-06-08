@@ -26,7 +26,7 @@ sources:
         ## Latest stable x.y.z version
         pattern: 'azure-cli-(\d*)\.(\d*)\.(\d*)$'
     transformers:
-      - trimPrefix: "azure-cli-"
+      - trimprefix: "azure-cli-"
 
 conditions:
   testDockerfileArgAzCliVersion:
@@ -44,7 +44,7 @@ conditions:
     disablesourceinput: true
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[15].key"
+      key: "metadataTest.labels[14].key"
       value: io.jenkins-infra.tools.azure-cli.version
 
 targets:
@@ -54,7 +54,7 @@ targets:
     kind: yaml
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[15].value"
+      key: "metadataTest.labels[14].value"
     scmid: default
   updateDockerfileArgVersion:
     name: "Update the value of ARG AZ_CLI_VERSION in the Dockerfile"
