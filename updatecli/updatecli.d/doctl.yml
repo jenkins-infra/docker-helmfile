@@ -41,7 +41,7 @@ conditions:
     disablesourceinput: true
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[13].key"
+      key: "metadataTest.labels[12].key"
       value: io.jenkins-infra.tools.doctl.version
 
 targets:
@@ -50,7 +50,7 @@ targets:
     kind: yaml
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[13].value"
+      key: "metadataTest.labels[12].value"
     scmid: default
   updateDockerfile:
     name: "Update the value of ARG DOCTL_VERSION in the Dockerfile"

@@ -18,7 +18,7 @@ sources:
     kind: githubrelease
     name: Get the latest kubectl version
     transformers:
-      - trimPrefix: "kubernetes-"
+      - trimprefix: "kubernetes-"
     spec:
       owner: "kubernetes"
       repository: "kubectl"

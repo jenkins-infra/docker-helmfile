@@ -38,7 +38,7 @@ targets:
     kind: yaml
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[11].value"
+      key: "metadataTest.labels[10].value"
     scmid: default
   updateDockerfile:
     name: "Update the value of ARG UPDATECLI_VERSION in the Dockerfile"

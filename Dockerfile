@@ -54,10 +54,6 @@ RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
 ARG AWS_CLI_VERSION=1.25.4
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
-ARG AWS_IAM_AUTH_VERSION="1.19.6"
-RUN wget "https://amazon-eks.s3.us-west-2.amazonaws.com/${AWS_IAM_AUTH_VERSION}/2021-01-05/bin/linux/amd64/aws-iam-authenticator" --quiet --output-document=/usr/local/bin/aws-iam-authenticator \
-  && chmod a+x /usr/local/bin/aws-iam-authenticator \
-  && aws-iam-authenticator version
 
 # Install updatecli
 ARG UPDATECLI_VERSION=v0.25.0
@@ -105,7 +101,7 @@ RUN \
 ## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
 ARG JENKINS_AGENT_VERSION=4.13-2-alpine-jdk11
 
-LABEL io.jenkins-infra.tools="aws-cli,aws-iam-authenticator,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,ruby,sops,updatecli,yamllint,yq"
+LABEL io.jenkins-infra.tools="aws-cli,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,ruby,sops,updatecli,yamllint,yq"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
 LABEL io.jenkins-infra.tools.helm.plugins="helm-diff,helm-git,helm-secrets"
 LABEL io.jenkins-infra.tools.helm.plugins.helm-diff.version="${HELM_DIFF_VERSION}"
@@ -117,7 +113,6 @@ LABEL io.jenkins-infra.tools.helmfile.version="${HELMFILE_VERSION}"
 LABEL io.jenkins-infra.tools.aws-cli.version="${AWS_CLI_VERSION}"
 LABEL io.jenkins-infra.tools.yamllint.version="${YAMLLINT_VERSION}"
 LABEL io.jenkins-infra.tools.updatecli.version="${UPDATECLI_VERSION}"
-LABEL io.jenkins-infra.tools.aws-iam-authenticator.version="latest"
 LABEL io.jenkins-infra.tools.jenkins-agent.version="${JENKINS_AGENT_VERSION}"
 LABEL io.jenkins-infra.tools.doctl.version="${DOCTL_VERSION}"
 LABEL io.jenkins-infra.tools.ruby.version="${RUBY_VERSION}"

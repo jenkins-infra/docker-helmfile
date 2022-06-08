@@ -55,7 +55,7 @@ targets:
     sourceid: lastHelmDiff
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[8].value"
+      key: "metadataTest.labels[7].value"
     scmid: default
   updateHelmSecrets:
     name: "Update helm-secrets plugin version"
@@ -73,7 +73,7 @@ targets:
     sourceid: lastHelmSecrets
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[9].value"
+      key: "metadataTest.labels[8].value"
     scmid: default
   updateHelmGit:
     name: "Update helm-git plugin version"
@@ -91,7 +91,7 @@ targets:
     sourceid: lastHelmGit
     spec:
       file: "cst.yml"
-      key: "metadataTest.labels[10].value"
+      key: "metadataTest.labels[9].value"
     scmid: default
 
 pullrequests:
