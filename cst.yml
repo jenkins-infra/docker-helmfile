@@ -17,7 +17,7 @@ metadataTest:
     - key: io.jenkins-infra.tools.sops.version
       value: "3.7.3"
     - key: io.jenkins-infra.tools.aws-cli.version
-      value: "1.25.9"
+      value: "1.25.14"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
       value: "v3.5.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
@@ -29,7 +29,7 @@ metadataTest:
     - key: "io.jenkins-infra.tools.jenkins-agent.version"
       value: "4.13-2-alpine-jdk11"
     - key: "io.jenkins-infra.tools.doctl.version"
-      value: "1.76.2"
+      value: "1.77.0"
     - key: "io.jenkins-infra.tools.ruby.version"
       value: "3.0"
     - key: io.jenkins-infra.tools.azure-cli.version

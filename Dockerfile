@@ -51,7 +51,7 @@ RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
 
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.25.9
+ARG AWS_CLI_VERSION=1.25.14
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 
@@ -64,7 +64,7 @@ RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_V
   && rm /usr/local/bin/updatecli.tar.gz
 
 # Install doctl
-ARG DOCTL_VERSION=1.76.2
+ARG DOCTL_VERSION=1.77.0
 RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/doctl.tar.gz \
   && tar zxf /tmp/doctl.tar.gz -C /usr/local/bin/ \
   && rm /tmp/doctl.tar.gz \
