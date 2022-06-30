@@ -42,7 +42,7 @@ RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sop
 # Install helmfile
 ARG HELMFILE_VERSION=0.145.0
 RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_arm64.tar.gz" --quiet --output-document=/tmp/helmfile.tgz \
-  && tar zxf /tmp/helmfile.tgz --strip-components 1 -C /usr/local/bin/ \
+  && tar zxf /tmp/helmfile.tgz helmfile -C /usr/local/bin/ \
   && rm /tmp/* \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
