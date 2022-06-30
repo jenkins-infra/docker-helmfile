@@ -44,7 +44,6 @@ ARG HELMFILE_VERSION=0.145.0
 RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_arm64.tar.gz" --quiet --output-document=/tmp/helmfile.tgz \
   && tar zxf /tmp/helmfile.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm /tmp/* \
-  && chmod +x /usr/local/bin/helmfile \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
 ARG YAMLLINT_VERSION=1.26
