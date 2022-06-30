@@ -40,9 +40,10 @@ RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sop
   && sops --version | grep -q "${SOPS_VERSION}"
 
 # Install helmfile
-ARG HELMFILE_VERSION=0.144.0
-RUN wget "https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64" --quiet --output-document=/usr/local/bin/helmfile \
-  && chmod +x /usr/local/bin/helmfile \
+ARG HELMFILE_VERSION=0.145.0
+RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_arm64.tar.gz" --quiet --output-document=/tmp/helmfile.tgz \
+  && tar --extract --gzip --verbose --file=/tmp/helmfile.tgz --directory=/usr/local/bin helmfile \
+  && rm /tmp/* \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
 ARG YAMLLINT_VERSION=1.26

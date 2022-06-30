@@ -18,7 +18,7 @@ sources:
     kind: githubrelease
     name: Get the latest helmfile version
     spec:
-      owner: "roboll"
+      owner: "helmfile"
       repository: "helmfile"
       token: "{{ requiredEnv .github.token }}"
       username: "{{ .github.username }}"
