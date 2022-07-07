@@ -33,7 +33,7 @@ metadataTest:
     - key: "io.jenkins-infra.tools.ruby.version"
       value: "3.0"
     - key: io.jenkins-infra.tools.azure-cli.version
-      value: "2.37.0"
+      value: "2.38.0"
   entrypoint: ["/usr/local/bin/jenkins-agent"]
   cmd: []
   workdir: "/home/jenkins"
