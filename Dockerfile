@@ -22,13 +22,13 @@ RUN apk add --no-cache \
   wget \
   yq
 
-ARG HELM_VERSION=3.9.0
+ARG HELM_VERSION=3.9.1
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm /tmp/* \
   && helm version | grep -q "${HELM_VERSION}"
 
-ARG KUBECTL_VERSION=1.22.11
+ARG KUBECTL_VERSION=1.22.12
 RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" --quiet --output-document=/usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl \
   && kubectl version --client | grep -q "${KUBECTL_VERSION}"
