@@ -80,14 +80,6 @@ RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-
   && python3 -m pip install --no-cache-dir azure-cli=="${AZ_CLI_VERSION}" \
   && apk del .az-build-deps
 
-ARG RUBY_VERSION=3.0
-## Always use the latest Gem and package versions
-# hadolint ignore=DL3028,DL3018
-RUN apk add --no-cache --virtual .build-deps build-base openssl-dev ruby-dev \
-  && apk add --no-cache openssl ruby=~"${RUBY_VERSION}" \
-  && gem install --no-document graphql-client httparty jwt time openssl base64 \
-  && apk del --purge .build-deps
-
 USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.5.0
@@ -102,7 +94,7 @@ RUN \
 ## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
 ARG JENKINS_AGENT_VERSION=4.13.2-1-alpine-jdk11
 
-LABEL io.jenkins-infra.tools="aws-cli,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,ruby,sops,updatecli,yamllint,yq"
+LABEL io.jenkins-infra.tools="aws-cli,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,sops,updatecli,yamllint,yq"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
 LABEL io.jenkins-infra.tools.helm.plugins="helm-diff,helm-git,helm-secrets"
 LABEL io.jenkins-infra.tools.helm.plugins.helm-diff.version="${HELM_DIFF_VERSION}"
@@ -116,7 +108,6 @@ LABEL io.jenkins-infra.tools.yamllint.version="${YAMLLINT_VERSION}"
 LABEL io.jenkins-infra.tools.updatecli.version="${UPDATECLI_VERSION}"
 LABEL io.jenkins-infra.tools.jenkins-agent.version="${JENKINS_AGENT_VERSION}"
 LABEL io.jenkins-infra.tools.doctl.version="${DOCTL_VERSION}"
-LABEL io.jenkins-infra.tools.ruby.version="${RUBY_VERSION}"
 LABEL io.jenkins-infra.tools.azure-cli.version="${AZ_CLI_VERSION}"
 
 ENTRYPOINT ["/usr/local/bin/jenkins-agent"]
