@@ -25,7 +25,7 @@ RUN apk add --no-cache \
 ARG HELM_VERSION=3.9.1
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
-  && rm /tmp/* \
+  && rm -f /tmp/helm.tgz \
   && helm version | grep -q "${HELM_VERSION}"
 
 ARG KUBECTL_VERSION=1.22.12
@@ -43,7 +43,7 @@ RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sop
 ARG HELMFILE_VERSION=0.145.2
 RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_arm64.tar.gz" --quiet --output-document=/tmp/helmfile.tgz \
   && tar --extract --gzip --verbose --file=/tmp/helmfile.tgz --directory=/usr/local/bin helmfile \
-  && rm /tmp/* \
+  && rm -f /tmp/helmfile.tgz \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
 ARG YAMLLINT_VERSION=1.26
@@ -62,13 +62,13 @@ RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_V
   && tar zxf /usr/local/bin/updatecli.tar.gz -C /usr/local/bin/ \
   && chmod a+x /usr/local/bin/updatecli \
   && updatecli version \
-  && rm /usr/local/bin/updatecli.tar.gz
+  && rm -f /usr/local/bin/updatecli.tar.gz
 
 # Install doctl
 ARG DOCTL_VERSION=1.78.0
 RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/doctl.tar.gz \
   && tar zxf /tmp/doctl.tar.gz -C /usr/local/bin/ \
-  && rm /tmp/doctl.tar.gz \
+  && rm -f /tmp/doctl.tar.gz \
   && chmod +x /usr/local/bin/doctl \
   && doctl version | grep -q "${DOCTL_VERSION}"
 
