@@ -80,14 +80,6 @@ RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-
   && python3 -m pip install --no-cache-dir azure-cli=="${AZ_CLI_VERSION}" \
   && apk del .az-build-deps
 
-ARG RUBY_VERSION=3.0
-## Always use the latest Gem and package versions
-# hadolint ignore=DL3028,DL3018
-RUN apk add --no-cache --virtual .build-deps build-base openssl-dev ruby-dev \
-  && apk add --no-cache openssl ruby=~"${RUBY_VERSION}" \
-  && gem install --no-document graphql-client httparty jwt time openssl base64 \
-  && apk del --purge .build-deps
-
 USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.5.0
