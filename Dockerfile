@@ -22,7 +22,7 @@ RUN apk add --no-cache \
   wget \
   yq
 
-ARG HELM_VERSION=3.9.1
+ARG HELM_VERSION=3.9.2
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm -f /tmp/helm.tgz \
@@ -52,12 +52,12 @@ RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
 
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.25.33
+ARG AWS_CLI_VERSION=1.25.45
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 
 # Install updatecli
-ARG UPDATECLI_VERSION=v0.28.0
+ARG UPDATECLI_VERSION=v0.29.0
 RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_VERSION}/updatecli_Linux_x86_64.tar.gz" --quiet --output-document=/usr/local/bin/updatecli.tar.gz \
   && tar zxf /usr/local/bin/updatecli.tar.gz -C /usr/local/bin/ \
   && chmod a+x /usr/local/bin/updatecli \
