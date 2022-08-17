@@ -9,7 +9,7 @@ metadataTest:
     - key: io.jenkins-infra.tools.helm.version
       value: "3.9.2"
     - key: io.jenkins-infra.tools.helmfile.version
-      value: "0.145.2"
+      value: "0.145.3"
     - key: "io.jenkins-infra.tools.helm.plugins"
       value: "helm-diff,helm-git,helm-secrets"
     - key: io.jenkins-infra.tools.kubectl.version
