@@ -22,7 +22,7 @@ RUN apk add --no-cache \
   wget \
   yq
 
-ARG HELM_VERSION=3.9.2
+ARG HELM_VERSION=3.9.4
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm -f /tmp/helm.tgz \
@@ -40,7 +40,7 @@ RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sop
   && sops --version | grep -q "${SOPS_VERSION}"
 
 # Install helmfile
-ARG HELMFILE_VERSION=0.145.2
+ARG HELMFILE_VERSION=0.145.4
 RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz" --quiet --output-document=/tmp/helmfile.tgz \
   && tar --extract --gzip --verbose --file=/tmp/helmfile.tgz --directory=/usr/local/bin helmfile \
   && rm -f /tmp/helmfile.tgz \
@@ -52,7 +52,7 @@ RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
 
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.25.53
+ARG AWS_CLI_VERSION=1.25.64
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 
@@ -65,7 +65,7 @@ RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_V
   && rm -f /usr/local/bin/updatecli.tar.gz
 
 # Install doctl
-ARG DOCTL_VERSION=1.78.0
+ARG DOCTL_VERSION=1.79.0
 RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/doctl.tar.gz \
   && tar zxf /tmp/doctl.tar.gz -C /usr/local/bin/ \
   && rm -f /tmp/doctl.tar.gz \
