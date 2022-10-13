@@ -29,7 +29,7 @@ metadataTest:
     - key: "io.jenkins-infra.tools.jenkins-agent.version"
       value: "3046.v38db_38a_b_7a_86-1-alpine-jdk11"
     - key: "io.jenkins-infra.tools.doctl.version"
-      value: "1.82.0"
+      value: "1.83.0"
     - key: io.jenkins-infra.tools.azure-cli.version
       value: "2.38.0"
   entrypoint: ["/usr/local/bin/jenkins-agent"]
