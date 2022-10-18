@@ -1,4 +1,4 @@
-ARG JENKINS_AGENT_VERSION=3046.v38db_38a_b_7a_86-1-alpine-jdk11
+ARG JENKINS_AGENT_VERSION=3063.v26e24490f041-2-alpine-jdk11
 FROM jenkins/inbound-agent:${JENKINS_AGENT_VERSION}
 USER root
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
@@ -22,13 +22,13 @@ RUN apk add --no-cache \
   wget \
   yq
 
-ARG HELM_VERSION=3.10.0
+ARG HELM_VERSION=3.10.1
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm -f /tmp/helm.tgz \
   && helm version | grep -q "${HELM_VERSION}"
 
-ARG KUBECTL_VERSION=1.22.15
+ARG KUBECTL_VERSION=1.23.12
 RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" --quiet --output-document=/usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl \
   && kubectl version --client | grep -q "${KUBECTL_VERSION}"
@@ -40,7 +40,7 @@ RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sop
   && sops --version | grep -q "${SOPS_VERSION}"
 
 # Install helmfile
-ARG HELMFILE_VERSION=0.146.0
+ARG HELMFILE_VERSION=0.147.0
 RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz" --quiet --output-document=/tmp/helmfile.tgz \
   && tar --extract --gzip --verbose --file=/tmp/helmfile.tgz --directory=/usr/local/bin helmfile \
   && rm -f /tmp/helmfile.tgz \
@@ -52,7 +52,7 @@ RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
 
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.25.83
+ARG AWS_CLI_VERSION=1.25.90
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 
@@ -65,7 +65,7 @@ RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_V
   && rm -f /usr/local/bin/updatecli.tar.gz
 
 # Install doctl
-ARG DOCTL_VERSION=1.82.0
+ARG DOCTL_VERSION=1.83.0
 RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/doctl.tar.gz \
   && tar zxf /tmp/doctl.tar.gz -C /usr/local/bin/ \
   && rm -f /tmp/doctl.tar.gz \
@@ -84,7 +84,7 @@ USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.6.0
 ARG HELM_SECRETS_VERSION=v4.1.1
-ARG HELM_GIT_VERSION=v0.11.4
+ARG HELM_GIT_VERSION=v0.13.0
 RUN \
   helm plugin install https://github.com/databus23/helm-diff --version ${HELM_DIFF_VERSION} && \
   helm plugin install https://github.com/jkroepke/helm-secrets --version ${HELM_SECRETS_VERSION} && \
@@ -92,7 +92,7 @@ RUN \
 
 
 ## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
-ARG JENKINS_AGENT_VERSION=3046.v38db_38a_b_7a_86-1-alpine-jdk11
+ARG JENKINS_AGENT_VERSION=3063.v26e24490f041-2-alpine-jdk11
 
 LABEL io.jenkins-infra.tools="aws-cli,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,sops,updatecli,yamllint,yq"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"

@@ -7,29 +7,29 @@ metadataTest:
     - key: io.jenkins-infra.tools
       value: "aws-cli,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,sops,updatecli,yamllint,yq"
     - key: io.jenkins-infra.tools.helm.version
-      value: "3.10.0"
+      value: "3.10.1"
     - key: io.jenkins-infra.tools.helmfile.version
-      value: "0.146.0"
+      value: "0.147.0"
     - key: "io.jenkins-infra.tools.helm.plugins"
       value: "helm-diff,helm-git,helm-secrets"
     - key: io.jenkins-infra.tools.kubectl.version
-      value: "1.22.15"
+      value: "1.23.12"
     - key: io.jenkins-infra.tools.sops.version
       value: "3.7.3"
     - key: io.jenkins-infra.tools.aws-cli.version
-      value: "1.25.83"
+      value: "1.25.90"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
       value: "v3.6.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
       value: "v4.1.1"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-git.version"
-      value: "v0.11.4"
+      value: "v0.13.0"
     - key: "io.jenkins-infra.tools.updatecli.version"
       value: "v0.36.1"
     - key: "io.jenkins-infra.tools.jenkins-agent.version"
-      value: "3046.v38db_38a_b_7a_86-1-alpine-jdk11"
+      value: "3063.v26e24490f041-2-alpine-jdk11"
     - key: "io.jenkins-infra.tools.doctl.version"
-      value: "1.82.0"
+      value: "1.83.0"
     - key: io.jenkins-infra.tools.azure-cli.version
       value: "2.38.0"
   entrypoint: ["/usr/local/bin/jenkins-agent"]
