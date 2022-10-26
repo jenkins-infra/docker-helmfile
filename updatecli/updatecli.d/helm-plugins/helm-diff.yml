@@ -1,0 +1,54 @@
+---
+name: Bump the plugin `helm-diff` version
+
+scms:
+  default:
+    kind: github
+    spec:
+      user: "{{ .github.user }}"
+      email: "{{ .github.email }}"
+      owner: "{{ .github.owner }}"
+      repository: "{{ .github.repository }}"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+      branch: "{{ .github.branch }}"
+
+sources:
+  lastHelmDiff:
+    kind: githubrelease
+    name: Get the latest helm version
+    spec:
+      owner: "databus23"
+      repository: "helm-diff"
+      token: "{{ requiredEnv .github.token }}"
+      username: "{{ .github.username }}"
+
+targets:
+  updateHelmDiff:
+    name: "Update helm-diff plugin version"
+    kind: dockerfile
+    sourceid: lastHelmDiff
+    spec:
+      file: Dockerfile
+      instruction:
+        keyword: "ARG"
+        matcher: "HELM_DIFF_VERSION"
+    scmid: default
+  updateCstHelmDiff:
+    name: "Update helm-diff plugin version in the test harness"
+    kind: yaml
+    sourceid: lastHelmDiff
+    spec:
+      file: "cst.yml"
+      key: "metadataTest.labels[7].value"
+    scmid: default
+
+pullrequests:
+  default:
+    kind: github
+    scmid: default
+    title: Bump the plugin `helm-diff` version to {{ source "lastHelmDiff" }}
+    spec:
+      labels:
+        - dependencies
+        - helm-diff

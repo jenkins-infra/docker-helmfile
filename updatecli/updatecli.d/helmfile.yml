@@ -1,5 +1,5 @@
 ---
-title: "[helmfile] Update version"
+name: Bump `helmfile`version
 
 scms:
   default:
@@ -67,9 +67,8 @@ pullrequests:
   default:
     kind: github
     scmid: default
-    targets:
-      - updateCst
-      - updateDockerfile
+    title: Bump `helmfile`version to {{ source "helmfile" }}
     spec:
       labels:
         - dependencies
+        - helmfile

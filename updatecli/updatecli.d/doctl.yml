@@ -1,5 +1,5 @@
 ---
-title: "[doctl] Update version"
+name: Bump the `doctl` CLI version
 
 scms:
   default:
@@ -66,9 +66,7 @@ pullrequests:
   default:
     kind: github
     scmid: default
-    targets:
-      - updateCst
-      - updateDockerfile
+    title: Bump the `doctl` CLI version to {{ source "doctl" }}
     spec:
       labels:
         - dependencies
