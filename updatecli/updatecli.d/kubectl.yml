@@ -1,5 +1,5 @@
 ---
-title: "[kubectl] Update version"
+name: Bump `kubectl` version
 
 scms:
   default:
@@ -69,9 +69,8 @@ pullrequests:
   default:
     kind: github
     scmid: default
-    targets:
-      - updateCst
-      - updateDockerfile
+    title: Bump `kubectl` version to {{ source "default" }}
     spec:
       labels:
         - dependencies
+        - kubectl
