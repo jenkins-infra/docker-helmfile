@@ -15,7 +15,7 @@ metadataTest:
     - key: io.jenkins-infra.tools.kubectl.version
       value: "1.23.13"
     - key: io.jenkins-infra.tools.sops.version
-      value: "3.7.3"
+      value: "v3.7.3"
     - key: io.jenkins-infra.tools.aws-cli.version
       value: "1.25.94"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
