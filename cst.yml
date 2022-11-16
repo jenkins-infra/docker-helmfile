@@ -21,7 +21,7 @@ metadataTest:
     - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
       value: "v3.6.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
-      value: "v4.2.0"
+      value: "v4.2.1"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-git.version"
       value: "v0.13.0"
     - key: "io.jenkins-infra.tools.updatecli.version"
