@@ -22,13 +22,13 @@ RUN apk add --no-cache \
   wget \
   yq
 
-ARG HELM_VERSION=3.10.1
+ARG HELM_VERSION=3.10.2
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm -f /tmp/helm.tgz \
   && helm version | grep -q "${HELM_VERSION}"
 
-ARG KUBECTL_VERSION=1.23.13
+ARG KUBECTL_VERSION=1.23.14
 RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" --quiet --output-document=/usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl \
   && kubectl version --client | grep -q "${KUBECTL_VERSION}"
@@ -40,7 +40,7 @@ RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sop
   && sops --version | grep -q "${SOPS_VERSION}"
 
 # Install helmfile
-ARG HELMFILE_VERSION=0.147.0
+ARG HELMFILE_VERSION=0.148.1
 RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz" --quiet --output-document=/tmp/helmfile.tgz \
   && tar --extract --gzip --verbose --file=/tmp/helmfile.tgz --directory=/usr/local/bin helmfile \
   && rm -f /tmp/helmfile.tgz \
@@ -52,12 +52,12 @@ RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
 
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.27.0
+ARG AWS_CLI_VERSION=1.27.10
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 
 # Install updatecli
-ARG UPDATECLI_VERSION=v0.36.1
+ARG UPDATECLI_VERSION=v0.37.0
 RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_VERSION}/updatecli_Linux_x86_64.tar.gz" --quiet --output-document=/usr/local/bin/updatecli.tar.gz \
   && tar zxf /usr/local/bin/updatecli.tar.gz -C /usr/local/bin/ \
   && chmod a+x /usr/local/bin/updatecli \
@@ -83,7 +83,7 @@ RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-
 USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.6.0
-ARG HELM_SECRETS_VERSION=v4.1.1
+ARG HELM_SECRETS_VERSION=v4.2.1
 ARG HELM_GIT_VERSION=v0.14.0
 RUN \
   helm plugin install https://github.com/databus23/helm-diff --version ${HELM_DIFF_VERSION} && \
