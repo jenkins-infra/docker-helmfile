@@ -46,7 +46,7 @@ RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VER
   && rm -f /tmp/helmfile.tgz \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
-ARG YAMLLINT_VERSION=1.26
+ARG YAMLLINT_VERSION=1.28
 RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
   && yamllint --version | grep -q "${YAMLLINT_VERSION}"
 
