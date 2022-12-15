@@ -1,4 +1,4 @@
-ARG JENKINS_AGENT_VERSION=3077.vd69cf116da_6f-3-alpine-jdk11
+ARG JENKINS_AGENT_VERSION=3077.vd69cf116da_6f-4-alpine-jdk11
 FROM jenkins/inbound-agent:${JENKINS_AGENT_VERSION}
 USER root
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
@@ -46,7 +46,7 @@ RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VER
   && rm -f /tmp/helmfile.tgz \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
-ARG YAMLLINT_VERSION=1.26
+ARG YAMLLINT_VERSION=1.28
 RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
   && yamllint --version | grep -q "${YAMLLINT_VERSION}"
 
@@ -92,7 +92,7 @@ RUN \
 
 
 ## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
-ARG JENKINS_AGENT_VERSION=3077.vd69cf116da_6f-3-alpine-jdk11
+ARG JENKINS_AGENT_VERSION=3077.vd69cf116da_6f-4-alpine-jdk11
 
 LABEL io.jenkins-infra.tools="aws-cli,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,sops,updatecli,yamllint,yq"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
