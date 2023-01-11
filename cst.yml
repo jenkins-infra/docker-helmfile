@@ -17,7 +17,7 @@ metadataTest:
     - key: io.jenkins-infra.tools.sops.version
       value: "3.7.3"
     - key: io.jenkins-infra.tools.aws-cli.version
-      value: "1.27.38"
+      value: "1.27.47"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-diff.version"
       value: "v3.6.0"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
