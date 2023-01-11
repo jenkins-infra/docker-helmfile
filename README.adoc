@@ -1,6 +1,6 @@
 = Docker Image for Helmfile Operations
 
-[![](https://img.shields.io/docker/pulls/jenkinsciinfra/ldap?label=jenkinsciinfra%2Fhelmfile&logo=docker&logoColor=white)](https://hub.docker.com/r/jenkinsciinfra/helmfile/tags)
+image::https://img.shields.io/docker/pulls/jenkinsciinfra/ldap?label=jenkinsciinfra%2Fhelmfile&logo=docker&logoColor=white[link=https://hub.docker.com/r/jenkinsciinfra/helmfile/tags]
 
 This repository hosts the resources to build a Docker Image used for Helmfile operations on the Jenkins Infrastructure.
 
