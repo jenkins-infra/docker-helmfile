@@ -25,7 +25,7 @@ metadataTest:
     - key: "io.jenkins-infra.tools.helm.plugins.helm-git.version"
       value: "v0.14.3"
     - key: "io.jenkins-infra.tools.updatecli.version"
-      value: "v0.43.0"
+      value: "v0.44.2"
     - key: "io.jenkins-infra.tools.jenkins-agent.version"
       value: "3107.v665000b_51092-2-alpine-jdk11"
     - key: "io.jenkins-infra.tools.doctl.version"
