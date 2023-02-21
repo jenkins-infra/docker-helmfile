@@ -28,10 +28,10 @@ RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet 
   && rm -f /tmp/helm.tgz \
   && helm version | grep -q "${HELM_VERSION}"
 
-ARG KUBECTL_VERSION=1.23.16
+ARG KUBECTL_VERSION=1.24.10
 RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" --quiet --output-document=/usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl \
-  && kubectl version --client | grep -q "${KUBECTL_VERSION}"
+  && kubectl version --client --output=yaml 2>&1 | grep -q "${KUBECTL_VERSION}"
 
 # Install sops
 ARG SOPS_VERSION=3.7.3
