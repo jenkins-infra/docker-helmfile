@@ -23,7 +23,7 @@ metadataTest:
     - key: "io.jenkins-infra.tools.helm.plugins.helm-secrets.version"
       value: "v4.4.1"
     - key: "io.jenkins-infra.tools.helm.plugins.helm-git.version"
-      value: "v0.15.0"
+      value: "v0.15.1"
     - key: "io.jenkins-infra.tools.updatecli.version"
       value: "v0.46.1"
     - key: "io.jenkins-infra.tools.jenkins-agent.version"
