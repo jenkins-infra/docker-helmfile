@@ -83,7 +83,7 @@ RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-
 USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.6.0
-ARG HELM_SECRETS_VERSION=v4.4.0
+ARG HELM_SECRETS_VERSION=v4.4.1
 ARG HELM_GIT_VERSION=v0.15.0
 RUN \
   helm plugin install https://github.com/databus23/helm-diff --version ${HELM_DIFF_VERSION} && \
