@@ -65,9 +65,9 @@ targets:
         matcher: "KUBECTL_VERSION"
     scmid: default
 
-pullrequests:
+actions:
   default:
-    kind: github
+    kind: github/pullrequest
     scmid: default
     title: Bump `kubectl` version to {{ source "default" }}
     spec:
