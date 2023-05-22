@@ -22,13 +22,13 @@ RUN apk add --no-cache \
   wget \
   yq
 
-ARG HELM_VERSION=3.11.2
+ARG HELM_VERSION=3.12.0
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm -f /tmp/helm.tgz \
   && helm version | grep -q "${HELM_VERSION}"
 
-ARG KUBECTL_VERSION=1.24.12
+ARG KUBECTL_VERSION=1.24.14
 RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl" --quiet --output-document=/usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl \
   && kubectl version --client --output=yaml 2>&1 | grep -q "${KUBECTL_VERSION}"
@@ -40,7 +40,7 @@ RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sop
   && sops --version | grep -q "${SOPS_VERSION}"
 
 # Install helmfile
-ARG HELMFILE_VERSION=0.151.0
+ARG HELMFILE_VERSION=0.153.1
 RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz" --quiet --output-document=/tmp/helmfile.tgz \
   && tar --extract --gzip --verbose --file=/tmp/helmfile.tgz --directory=/usr/local/bin helmfile \
   && rm -f /tmp/helmfile.tgz \
@@ -52,7 +52,7 @@ RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
 
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.27.99
+ARG AWS_CLI_VERSION=1.27.137
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 
@@ -65,7 +65,7 @@ RUN wget "https://github.com/updatecli/updatecli/releases/download/${UPDATECLI_V
   && rm -f /usr/local/bin/updatecli.tar.gz
 
 # Install doctl
-ARG DOCTL_VERSION=1.93.1
+ARG DOCTL_VERSION=1.96.0
 RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/doctl.tar.gz \
   && tar zxf /tmp/doctl.tar.gz -C /usr/local/bin/ \
   && rm -f /tmp/doctl.tar.gz \
@@ -73,7 +73,7 @@ RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSI
   && doctl version | grep -q "${DOCTL_VERSION}"
 
 ## Install Azure Cli
-ARG AZ_CLI_VERSION=2.46.0
+ARG AZ_CLI_VERSION=2.48.1
 # hadolint ignore=DL3013,DL3018
 RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-dev openssl-dev cargo make \
   && apk add --no-cache py3-pip py3-pynacl py3-cryptography \
@@ -82,7 +82,7 @@ RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-
 
 USER jenkins
 
-ARG HELM_DIFF_VERSION=v3.6.0
+ARG HELM_DIFF_VERSION=v3.8.0
 ARG HELM_SECRETS_VERSION=v4.4.2
 ARG HELM_GIT_VERSION=v0.15.1
 RUN \
