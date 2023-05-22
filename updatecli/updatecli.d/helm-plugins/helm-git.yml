@@ -43,9 +43,9 @@ targets:
       key: "metadataTest.labels[9].value"
     scmid: default
 
-pullrequests:
+actions:
   default:
-    kind: github
+    kind: github/pullrequest
     scmid: default
     title: Bump the plugin `helm-git` version to {{ source "lastHelmGit" }}
     spec:

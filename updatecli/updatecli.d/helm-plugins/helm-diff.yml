@@ -43,9 +43,9 @@ targets:
       key: "metadataTest.labels[7].value"
     scmid: default
 
-pullrequests:
+actions:
   default:
-    kind: github
+    kind: github/pullrequest
     scmid: default
     title: Bump the plugin `helm-diff` version to {{ source "lastHelmDiff" }}
     spec:

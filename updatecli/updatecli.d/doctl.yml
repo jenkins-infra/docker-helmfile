@@ -64,9 +64,9 @@ targets:
         matcher: "DOCTL_VERSION"
     scmid: default
 
-pullrequests:
+actions:
   default:
-    kind: github
+    kind: github/pullrequest
     scmid: default
     title: Bump the `doctl` CLI version to {{ source "doctl" }}
     spec:

@@ -74,9 +74,9 @@ targets:
         matcher: "JENKINS_AGENT_VERSION"
     scmid: default
 
-pullrequests:
+actions:
   default:
-    kind: github
+    kind: github/pullrequest
     scmid: default
     title: Bump Jenkins Agent (parent image) version to {{ source "lastVersion" }}
     spec:
