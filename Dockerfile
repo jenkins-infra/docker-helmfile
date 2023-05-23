@@ -1,4 +1,4 @@
-ARG JENKINS_AGENT_VERSION=3107.v665000b_51092-4-alpine-jdk11
+ARG JENKINS_AGENT_VERSION=3107.v665000b_51092-15-alpine-jdk11
 FROM jenkins/inbound-agent:${JENKINS_AGENT_VERSION}
 USER root
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
@@ -20,6 +20,7 @@ RUN apk add --no-cache \
   tar \
   unzip \
   wget \
+  yamllint \
   yq
 
 ARG HELM_VERSION=3.12.0
@@ -46,13 +47,9 @@ RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VER
   && rm -f /tmp/helmfile.tgz \
   && helmfile --version | grep -q "${HELMFILE_VERSION}"
 
-ARG YAMLLINT_VERSION=1.28
-RUN apk add --no-cache yamllint=~"${YAMLLINT_VERSION}" \
-  && yamllint --version | grep -q "${YAMLLINT_VERSION}"
-
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.27.137
+ARG AWS_CLI_VERSION=1.27.138
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 
@@ -73,7 +70,7 @@ RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSI
   && doctl version | grep -q "${DOCTL_VERSION}"
 
 ## Install Azure Cli
-ARG AZ_CLI_VERSION=2.48.1
+ARG AZ_CLI_VERSION=2.49.0
 # hadolint ignore=DL3013,DL3018
 RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-dev openssl-dev cargo make \
   && apk add --no-cache py3-pip py3-pynacl py3-cryptography \
@@ -92,7 +89,7 @@ RUN \
 
 
 ## As per https://docs.docker.com/engine/reference/builder/#scope, ARG need to be repeated for each scope
-ARG JENKINS_AGENT_VERSION=3107.v665000b_51092-4-alpine-jdk11
+ARG JENKINS_AGENT_VERSION=3107.v665000b_51092-15-alpine-jdk11
 
 LABEL io.jenkins-infra.tools="aws-cli,azure-cli,doctl,helm,helmfile,jenkins-agent,jq,kubectl,sops,updatecli,yamllint,yq"
 LABEL io.jenkins-infra.tools.helm.version="${HELM_VERSION}"
@@ -104,7 +101,6 @@ LABEL io.jenkins-infra.tools.kubectl.version="${KUBECTL_VERSION}"
 LABEL io.jenkins-infra.tools.sops.version="${SOPS_VERSION}"
 LABEL io.jenkins-infra.tools.helmfile.version="${HELMFILE_VERSION}"
 LABEL io.jenkins-infra.tools.aws-cli.version="${AWS_CLI_VERSION}"
-LABEL io.jenkins-infra.tools.yamllint.version="${YAMLLINT_VERSION}"
 LABEL io.jenkins-infra.tools.updatecli.version="${UPDATECLI_VERSION}"
 LABEL io.jenkins-infra.tools.jenkins-agent.version="${JENKINS_AGENT_VERSION}"
 LABEL io.jenkins-infra.tools.doctl.version="${DOCTL_VERSION}"
