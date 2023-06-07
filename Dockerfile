@@ -79,7 +79,7 @@ RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-
 
 USER jenkins
 
-ARG HELM_DIFF_VERSION=v3.8.0
+ARG HELM_DIFF_VERSION=v3.8.1
 ARG HELM_SECRETS_VERSION=v4.4.2
 ARG HELM_GIT_VERSION=v0.15.1
 RUN \
