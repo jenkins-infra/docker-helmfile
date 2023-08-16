@@ -23,7 +23,7 @@ RUN apk add --no-cache \
   yamllint \
   yq
 
-ARG HELM_VERSION=3.12.2
+ARG HELM_VERSION=3.12.3
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm -f /tmp/helm.tgz \
@@ -49,7 +49,7 @@ RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VER
 
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.29.22
+ARG AWS_CLI_VERSION=1.29.27
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 
@@ -80,7 +80,7 @@ RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-
 USER jenkins
 
 ARG HELM_DIFF_VERSION=v3.8.1
-ARG HELM_SECRETS_VERSION=v4.4.2
+ARG HELM_SECRETS_VERSION=v4.5.0
 ARG HELM_GIT_VERSION=v0.15.1
 RUN \
   helm plugin install https://github.com/databus23/helm-diff --version ${HELM_DIFF_VERSION} && \
