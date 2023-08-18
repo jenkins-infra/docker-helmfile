@@ -27,7 +27,7 @@ metadataTest:
     - key: "io.jenkins-infra.tools.updatecli.version"
       value: v0.57.0
     - key: "io.jenkins-infra.tools.jenkins-agent.version"
-      value: "3107.v665000b_51092-15-alpine-jdk11"
+      value: "3107.v665000b_51092-15-alpine-jdk17"
     - key: "io.jenkins-infra.tools.doctl.version"
       value: "1.96.1"
     - key: io.jenkins-infra.tools.azure-cli.version
@@ -95,3 +95,9 @@ fileExistenceTests:
     path: "/usr/local/bin/doctl"
     shouldExist: true
     isExecutableBy: "any"
+
+commandTests:
+  - name: "Check that `java` is present in the PATH and default to JDK17"
+    command: "java"
+    args: ["--version"]
+    expectedOutput: ["Temurin-17"]

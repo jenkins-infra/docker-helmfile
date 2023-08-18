@@ -25,7 +25,7 @@ sources:
       versionfilter:
         kind: latest
     transformers:
-      - addsuffix: "-alpine-jdk11"
+      - addsuffix: "-alpine-jdk17"
 
 conditions:
   testDockerfile:
