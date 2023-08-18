@@ -9,7 +9,7 @@ metadataTest:
     - key: io.jenkins-infra.tools.helm.version
       value: 3.12.3
     - key: io.jenkins-infra.tools.helmfile.version
-      value: 0.155.1
+      value: 0.156.0
     - key: "io.jenkins-infra.tools.helm.plugins"
       value: "helm-diff,helm-git,helm-secrets"
     - key: io.jenkins-infra.tools.kubectl.version
@@ -95,7 +95,6 @@ fileExistenceTests:
     path: "/usr/local/bin/doctl"
     shouldExist: true
     isExecutableBy: "any"
-
 commandTests:
   - name: "Check that `java` is present in the PATH and default to JDK17"
     command: "java"
