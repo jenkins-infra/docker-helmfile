@@ -35,7 +35,7 @@ RUN wget "https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_V
   && kubectl version --client --output=yaml 2>&1 | grep -q "${KUBECTL_VERSION}"
 
 # Install sops
-ARG SOPS_VERSION=3.8.0
+ARG SOPS_VERSION=3.8.1
 RUN wget "https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.amd64" --quiet --output-document=/usr/local/bin/sops \
   && chmod +x /usr/local/bin/sops \
   && sops --version | grep -q "${SOPS_VERSION}"
