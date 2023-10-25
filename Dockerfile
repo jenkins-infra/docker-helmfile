@@ -70,7 +70,7 @@ RUN wget "https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSI
   && doctl version | grep -q "${DOCTL_VERSION}"
 
 ## Install Azure Cli
-ARG AZ_CLI_VERSION=2.53.0
+ARG AZ_CLI_VERSION=2.53.1
 # hadolint ignore=DL3013,DL3018
 RUN apk add --no-cache --virtual .az-build-deps gcc musl-dev python3-dev libffi-dev openssl-dev cargo make \
   && apk add --no-cache py3-pip py3-pynacl py3-cryptography \
