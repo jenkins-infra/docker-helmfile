@@ -23,7 +23,7 @@ RUN apk add --no-cache \
   yamllint \
   yq
 
-ARG HELM_VERSION=3.13.1
+ARG HELM_VERSION=3.13.2
 RUN wget "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" --quiet --output-document=/tmp/helm.tgz \
   && tar zxf /tmp/helm.tgz --strip-components 1 -C /usr/local/bin/ \
   && rm -f /tmp/helm.tgz \
