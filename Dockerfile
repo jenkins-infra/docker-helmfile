@@ -49,7 +49,7 @@ RUN wget "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VER
 
 ## Install AWS CLI tools
 # Please note that only aws cli v1 is supported on alpine - https://github.com/aws/aws-cli/issues/4685
-ARG AWS_CLI_VERSION=1.32.5
+ARG AWS_CLI_VERSION=1.32.8
 RUN python3 -m pip install --no-cache-dir awscli=="${AWS_CLI_VERSION}" \
   && aws --version | grep -q "${AWS_CLI_VERSION}"
 
