@@ -1,6 +1,6 @@
 = Docker Image for Helmfile Operations
 
-Archived repository: see jenkins-infra/helpdesk#3823
+Archived repository, see https://github.com/jenkins-infra/helpdesk/issues/3823
 
 image::https://img.shields.io/docker/pulls/jenkinsciinfra/ldap?label=jenkinsciinfra%2Fhelmfile&logo=docker&logoColor=white[link=https://hub.docker.com/r/jenkinsciinfra/helmfile/tags]
 
